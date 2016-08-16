@@ -6,6 +6,7 @@ function Field(){
     this.size = 70;
     this.padding = 5;
     this.customColor1 = '#efefef';
+    this.customColor2 = 'blue';
 }
 
 Field.prototype.init = function() {
@@ -49,7 +50,6 @@ Field.prototype.init = function() {
         self.cellCount(1, 0);
     }    
 
-
 }
 
 Field.prototype.cellCount = function (r, c) {
@@ -90,12 +90,17 @@ function removeElementsByClass(className){
 Field.prototype.drawCells = function () {
     
     removeElementsByClass('cell');
+    removeElementsByClass('label');
+    this.cells = [];
+
 
     var cellSize = (this.fWidth / this.cols) - this.padding*(this.cols + 1);
     cellSize = cellSize | 0;
     this.el.style.width = (cellSize*this.cols + this.padding + this.padding*this.cols) + 'px';
     this.el.style.height = (cellSize*this.rows + this.padding + this.padding*this.rows) + 'px';
     
+
+
     for (i=1; i<= this.rows; i++) {
         for (j=1; j<= this.cols; j++) {
             var cell = document.createElement('div');
@@ -104,6 +109,43 @@ Field.prototype.drawCells = function () {
             cell.style.marginLeft = cell.style.marginTop = this.padding + 'px';
             cell.style.backgroundColor = this.customColor1;
             this.el.appendChild(cell);
+            this.cells.push(cell);
         }
     }
+
+    // display top fractions
+    for (i=1; i <= this.cols; i++) {
+        var label = document.createElement('div');
+
+        if (1 == this.cols) {
+            label.innerHTML = '1';
+        } else {
+            label.innerHTML = '<sup>1</sup>&frasl;<sub>'+ this.cols +'</sub>';
+        }
+
+        label.style.position = 'absolute';
+        label.className = 'label';
+        label.style.top = '-25px';
+        this.el.appendChild(label);
+        label.style.left = (i*this.padding + (i-1)*cellSize + cellSize/2 - label.clientWidth/2) + 'px';
+    }
+
+    // display left fractions
+    for (i=1; i <= this.rows; i++) {
+        var label = document.createElement('div');
+
+        if (1 == this.rows) {
+            label.innerHTML = '1';
+        } else {
+            label.innerHTML = '<sup>1</sup>&frasl;<sub>'+ this.rows +'</sub>';
+        }
+
+        label.style.position = 'absolute';
+        label.className = 'label';
+        label.style.left = '-25px';
+        this.el.appendChild(label);
+        label.style.top = (i*this.padding + (i-1)*cellSize + cellSize/2 - label.clientHeight/2) + 'px';
+    }
+
+
 }
