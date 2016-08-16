@@ -99,6 +99,14 @@ function removeElementsByClass(className){
     }
 }
 
+function gcf(a, b) {
+    if ( ! b) {
+        return a;
+    }
+
+    return gcf(b, a % b);
+}
+
 Field.prototype.drawCells = function () {
     var self = this;
     
@@ -168,6 +176,31 @@ Field.prototype.drawCells = function () {
 
                     label.style.marginLeft = '-' + (label.clientWidth/2) + 'px';
                     label.style.marginTop = '-' + (label.clientHeight/2) + 'px';
+
+                    var mainLabel = document.getElementById('main-label');
+
+                    var numerator = i*j;
+                    var denominator = self.rows*self.cols;
+
+                    var capt;
+                    if (1 == numerator && 1 == denominator) {
+                        capt = '1';
+                    } else {
+                        capt = '<sup>'+ numerator +'</sup>&frasl;<sub>'+ denominator +'</sub>';
+                    } 
+                    var gcfNumb = gcf(numerator, denominator);
+                    var numerator1 = numerator / gcfNumb;
+                    var denominator1 = denominator / gcfNumb;
+
+                    if (1 == numerator1 && 1 == denominator1) {
+                        capt += ' or 1';
+                    } else {    
+                        capt += ' or <sup>'+ numerator1 +'</sup>&frasl;<sub>'+ denominator1 +'</sub>';
+                    }
+
+
+
+                    mainLabel.innerHTML = capt;
 
                 };
             }(i, j, cell);
