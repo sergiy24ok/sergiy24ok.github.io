@@ -2,11 +2,23 @@
 
 function Field(){
     this.rows = 1;
-    this.cols = 3;
+    this.cols = 1;
     this.size = 70;
     this.padding = 5;
     this.customColor1 = '#efefef';
     this.customColor2 = 'blue';
+    this.textcolor = 'white';
+}
+
+function isDescendant(parent, child) {
+    var node = child.parentNode;
+    while (node != null) {
+        if (node == parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
 }
 
 Field.prototype.init = function() {
@@ -48,7 +60,7 @@ Field.prototype.init = function() {
 
     this.incRowsBtn.onclick = function(e) {
         self.cellCount(1, 0);
-    }    
+    } 
 
 }
 
@@ -88,6 +100,7 @@ function removeElementsByClass(className){
 }
 
 Field.prototype.drawCells = function () {
+    var self = this;
     
     removeElementsByClass('cell');
     removeElementsByClass('label');
@@ -110,6 +123,54 @@ Field.prototype.drawCells = function () {
             cell.style.backgroundColor = this.customColor1;
             this.el.appendChild(cell);
             this.cells.push(cell);
+
+            
+
+            cell.onclick = function(i, j, cell) {
+                return function(e){
+
+                    var cells = document.getElementsByClassName('cell');
+                    for (k=0;k<cells.length; k++) {
+
+                        if (cell == cells[k]) continue;
+                        cells[k].style.backgroundColor = self.customColor1;
+
+                        var row = (k / self.cols | 0) + 1;
+                        var col = k % self.cols +1;
+                        if (row <= i && col <= j) {
+                            cells[k].style.backgroundColor = 'green';
+                        }
+                    }
+                    removeElementsByClass('inner-label');
+
+                    cell.style.backgroundColor = self.customColor2;
+
+                    var label = document.createElement('div');
+                    label.className = 'inner-label';
+
+                    if (self.rows == 1 && self.cols ==1) {
+                        label.innerHTML = '1';
+                    } else {
+                        label.innerHTML = '<sup>1</sup>&frasl;<sub>'+ (self.rows*self.cols) +'</sub>';
+                    }
+                    label.style.color = self.textcolor;
+                    removeElementsByClass('inner-label');
+                    cell.appendChild(label);
+
+                    var font = 20;
+                    label.style.fontSize = font + 'px';
+                    while (label.clientWidth/cell.clientWidth < 0.5 || label.clientHeight/cell.clientHeight < 0.5) {
+                        font++;
+                        label.style.fontSize = font + 'px';
+                    }
+
+                    label.style.fontSize = (font-1) + 'px';
+
+                    label.style.marginLeft = '-' + (label.clientWidth/2) + 'px';
+                    label.style.marginTop = '-' + (label.clientHeight/2) + 'px';
+
+                };
+            }(i, j, cell);
         }
     }
 
