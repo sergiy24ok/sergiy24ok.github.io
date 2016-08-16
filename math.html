@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math</title>
+    <style>
+        .field {
+            border: 1px dashed black;
+            margin: 0 auto;
+            position: relative;
+            margin-top: 200px;
+        }
+
+        .field .cell {
+            background: #eaeaea;
+            float: left;
+        }
+
+        .field .arrow-left {
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-right-color: black;
+            border-right-width: 20px;
+            border-top-width: 12px;
+            border-bottom-width: 12px;
+            position: absolute;
+            top: -40px;
+            right: 50%;
+            margin-right: 5px;
+        }
+        
+        .field .arrow-right {
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-left-color: black;
+            border-left-width: 20px;
+            border-top-width: 12px;
+            border-bottom-width: 12px;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            margin-left: 5px;
+        }
+
+        .field .arrow-up {
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-bottom-color: black;
+            border-bottom-width: 20px;
+            border-left-width: 12px;
+            border-right-width: 12px;
+            position: absolute;
+            left: -40px;
+            bottom: 50%;
+            margin-bottom: 5px;
+        }
+        
+        .field .arrow-down {
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-top-color: black;
+            border-top-width: 20px;
+            border-left-width: 12px;
+            border-right-width: 12px;
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="math.js"></script>
+    <script type="text/javascript">
+        var field = new Field();
+        field.init();
+        field.drawCells();
+    </script>
+</body>
+</html>
