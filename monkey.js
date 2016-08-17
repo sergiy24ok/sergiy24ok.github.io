@@ -27,7 +27,7 @@ function createMetadata() {
             questions: [
                     {
                         text: 'Create an equation from two different expressions for the total number of monkeys',
-                        correctAnswers: [['x+y=100'], ['y+x=100'], ['100=x+y'], ['100=y+x']],
+                        correctAnswers: [['x', '+', 'y', '=', '100'], ['y','+','x','=','100'], ['100','=','x','+','y'], ['100','=','y','+','x']],
                         separateLine: true,
                     },
                     {
@@ -42,7 +42,7 @@ function createMetadata() {
                     },
                     {
                         text: 'Create an equation from two different expressions for the total number of bananas',
-                        correctAnswers: [['3x+y/3=100']],
+                        correctAnswers: [['3','x','+','y','/','3','=','100']],
                         separateLine: true,
                     },
             ]
@@ -79,10 +79,13 @@ function Question(meta) {
 
 
 Question.prototype.checkNew = function(newVal) {
+    // copy array
     var state = this.state.slice(0);
     var correctAnswers = this.correctAnswers;
 
     state.push(newVal);
+
+    console.log(state, newVal)
 
     var isSolved = correctAnswers.some(function(element, index, array){
         return (state.join(',') == element.join(','));
@@ -121,6 +124,8 @@ Question.prototype.init = function() {
             $(ui.draggable).data('hasBeenDropped', true);
 
             var val = ui.draggable.data('val');
+
+
             $(this).append(document.createTextNode(val));
             self.state.push(val);
 
@@ -130,8 +135,12 @@ Question.prototype.init = function() {
 
             if (solved) {
                 self.solved = true;
-                console.log(self.line);
                 self.line.showNextQuestion();
+            }
+
+            window.zoob = self.line;
+            if ('x' == val) {
+                self.line.exercise.addNextUnknown();
             }
         },
         accept: function(d) {
@@ -215,11 +224,17 @@ Line.prototype.init = function(){
 }
 
 Line.prototype.showNextQuestion = function(){
+    var solvedAll = true;
     for (i in this.questions) {
         if (!this.questions[i].solved) {
             this.qEl.append(this.questions[i].el);
+            solvedAll = false;
             break;
         }
+    }
+
+    if (solvedAll) {
+        this.exercise.nextLine();
     }
 }
 
@@ -250,11 +265,72 @@ function Exercise(meta) {
 Exercise.prototype.createToolbar = function ($el) {
     var toolbar = this.meta.toolbar;
     for (i in toolbar) {
-       var symbol = $('<div>', {'text': toolbar[i].symbol});
-       var text = $('<div>', {'text': toolbar[i].text});
-       $('<div>', {'class': 'tool'}).append(symbol).append(text).appendTo($el);
+        var symbol = $('<div>', {'text': toolbar[i].symbol});
+        var text = $('<div>', {'text': toolbar[i].text});
+
+        var data = toolbar[i].symbol == '?' ? 'x' : toolbar[i].symbol;
+        var tool = $('<div>', {'class': 'tool', 'data-val': data});
+
+        tool.append(symbol).append(text).appendTo($el);
+        //////
+        tool.draggable({
+            revert:  function(dropped) {
+                var $draggable = $(this),
+                hasBeenDroppedBefore = $draggable.data('hasBeenDropped'),
+                wasJustDropped = dropped && dropped[0].id == "droppable";
+                if(wasJustDropped) {
+                    // don't revert, it's in the droppable
+                    return false;
+                } else {
+                    if (hasBeenDroppedBefore) {
+                        // don't rely on the built in revert, do it yourself
+                        $draggable.animate({ top: 0, left: 0 }, 'slow');
+                        return false;
+                    } else {
+                        // just let the built in revert work, although really, you could animate to 0,0 here as well
+                        return true;
+                    }
+                }
+            }
+        });
+        //////
        
     }
+
+    this.toolbarEl = $el;
+
+}
+
+Exercise.prototype.addNextUnknown = function() {
+    var symbol = $('<div>', {'text': '?'});
+    var text = $('<div>', {'text': 'unknown y'});
+
+    var data = 'y';
+    var tool = $('<div>', {'class': 'tool', 'data-val': data});
+    tool.append(symbol).append(text);
+
+    $('#toolbar').append(tool);
+
+    tool.draggable({
+            revert:  function(dropped) {
+                var $draggable = $(this),
+                hasBeenDroppedBefore = $draggable.data('hasBeenDropped'),
+                wasJustDropped = dropped && dropped[0].id == "droppable";
+                if(wasJustDropped) {
+                    // don't revert, it's in the droppable
+                    return false;
+                } else {
+                    if (hasBeenDroppedBefore) {
+                        // don't rely on the built in revert, do it yourself
+                        $draggable.animate({ top: 0, left: 0 }, 'slow');
+                        return false;
+                    } else {
+                        // just let the built in revert work, although really, you could animate to 0,0 here as well
+                        return true;
+                    }
+                }
+            }
+        });
 }
 
 Exercise.prototype.showLines = function($el) {
@@ -266,6 +342,7 @@ Exercise.prototype.showLines = function($el) {
         line.init();
         $el.append(line.el); 
         self.lines.push(line);
+        line.exercise = self;
 
         line.el.on('click', '.arrow', function(line){
             return function(){
@@ -281,6 +358,15 @@ Exercise.prototype.showLines = function($el) {
     this.lines[0].canOpenOn();
 
 
+}
+
+Exercise.prototype.nextLine = function () {
+    for (i=0; i<this.lines.length; i++) {
+        if (!this.lines[i].canOpen) {
+            this.lines[i].canOpenOn();
+            break;
+        }
+    }
 }
 
 
