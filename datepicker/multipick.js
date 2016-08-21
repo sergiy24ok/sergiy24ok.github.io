@@ -10,16 +10,6 @@ $(document).ready(function(){
       return false;
     }
 
-    // eeeh .. no need for it, will remove later
-    // http://stackoverflow.com/a/3067896/1660185
-    Date.prototype.yyyymmdd = function() {
-        var mm = this.getMonth() + 1; // getMonth() is zero-based
-        var dd = this.getDate();
-
-        return [this.getFullYear(), !mm[1] && '0', mm, !dd[1] && '0', dd].join(''); // padding
-    };
-
-
     // returns array of dates between two given dates, including these two
     function getDatesRange(date1, date2) {
         if ('string' == typeof date1) {
@@ -59,10 +49,6 @@ $(document).ready(function(){
         }
 
         this.$el = el;
-
-        // remove it
-        window.eel = el;
-
         this.isShift = false;
         this.lastClick = {};
         this.state = [];
@@ -129,7 +115,8 @@ $(document).ready(function(){
     }    
 
 
+    window.picker = new MyDatepicker('#datepicker');
+    
 
-    new MyDatepicker('#datepicker');
 
 });
