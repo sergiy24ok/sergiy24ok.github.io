@@ -75,6 +75,8 @@ $(document).ready(function(){
         var options = this.options || {};
         $.extend(options, {
             onSelect: function(date, dateObj){
+
+                // state of datepicker: array of all dates selected
                 var state = $(this).multiDatesPicker('getDates');
                 var i;
                 for (i = 0; i < state.length; i++) {
@@ -87,16 +89,39 @@ $(document).ready(function(){
                     dateAdded = true;
                 }
 
-                if (self.lastClick.added && self.isShift && self.lastClick.date.toString() != date.toString()) {
-                    var range = getDatesRange(self.lastClick.date, date);
-                    
-                    for (i = 0; i < range.length; i++) {
-                        if (!includesDate(state, range[i])) {
-                            self.$el.multiDatesPicker('addDates', [range[i]]);
+                var range;
 
-                        }
+                // if previous click added date and shift is pressed: add range
+                if (self.lastClick.added && self.isShift && self.lastClick.date && self.lastClick.date.toString() != date.toString()) {
+                    range = getDatesRange(self.lastClick.date, date);
+
+                    self.$el.multiDatesPicker('addDates', range);
+                    // for (i = 0; i < range.length; i++) {
+                    //     if (!includesDate(state, range[i])) {
+                    //         self.$el.multiDatesPicker('addDates', [range[i]]);
+
+                    //     }
+                    // }
+
+                }
+
+                // if previous click removed date and shift is pressed: remove range (if all dates between selected)
+                if (!self.lastClick.added && self.isShift && self.lastClick.date && self.lastClick.date.toString() != date.toString()) {
+
+                    range = getDatesRange(self.lastClick.date, date);
+                    range.pop();
+                    range.shift();
+
+                    function isSelected(element, index, array) {
+                        return includesDate(state, element);
                     }
 
+                    var doRemoveRange = range.every(isSelected);
+
+                    if (doRemoveRange) {
+                        self.$el.multiDatesPicker('removeDates', range);
+                    }
+                    
                 }
                 
 
