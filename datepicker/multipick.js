@@ -43,7 +43,7 @@ $(document).ready(function(){
     }
 
     // Pass either element or selector.
-    function MyDatepicker(el) {
+    function MyDatepicker(el, options) {
         if ('string' == typeof el) {
             el = $(el);
         }
@@ -52,6 +52,7 @@ $(document).ready(function(){
         this.isShift = false;
         this.lastClick = {};
         this.state = [];
+        this.options = options;
 
         this.init();
     }
@@ -71,7 +72,8 @@ $(document).ready(function(){
             }
         });
 
-        this.$el.multiDatesPicker({
+        var options = this.options || {};
+        $.extend(options, {
             onSelect: function(date, dateObj){
                 var state = $(this).multiDatesPicker('getDates');
                 var i;
@@ -102,8 +104,9 @@ $(document).ready(function(){
                 self.lastClick.added = dateAdded;
 
             }
-            
         });
+        
+        this.$el.multiDatesPicker(options);
     }
 
     MyDatepicker.prototype.getDates = function() {
@@ -115,7 +118,7 @@ $(document).ready(function(){
     }    
 
 
-    window.picker = new MyDatepicker('#datepicker');
+    window.picker = new MyDatepicker('#datepicker', {numberOfMonths: [1, 3]});
     
 
 
