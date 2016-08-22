@@ -186,7 +186,7 @@ $(document).ready(function(){
 
         $(document).on('mouseup touchend', function(){
             self.mouseDown = false;
-            console.log('end', readDateFromTD(this))
+            console.log('end')
             if (self.dragDate1 && self.dragDate2) {
                 var range = getDatesRange(self.dragDate1, self.dragDate2);
                 self.dragDate1 = self.dragDate2 = null;
