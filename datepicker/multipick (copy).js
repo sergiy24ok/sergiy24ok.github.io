@@ -1,3 +1,24 @@
+// http://stackoverflow.com/a/12286320/1660185
+(function ($) {
+    $.extend($.datepicker, {
+
+        // Reference the orignal function so we can override it and call it later
+        _inlineDatepicker2: $.datepicker._inlineDatepicker,
+
+        // Override the _inlineDatepicker method
+        _inlineDatepicker: function (target, inst) {
+
+            // Call the original
+            this._inlineDatepicker2(target, inst);
+
+            var beforeShow = $.datepicker._get(inst, 'beforeShow');
+
+            if (beforeShow) {
+                beforeShow.apply(target, [target, inst]);
+            }
+        }
+    });
+}(jQuery));
 
 $(document).ready(function(){
     
@@ -51,31 +72,15 @@ $(document).ready(function(){
 
         this.$el = el;
         this.isShift = false;
-        this.mouseDown = false;
         this.lastClick = {
             rangeClosed: false
         };
 
         this.state = [];
         this.dragDate1 = null;
-        this.dragDate2 = null;
         this.options = options;
 
         this.init();
-    }
-
-    function readDateFromTD(el) {
-        var month = $(el).data('month') + 1;
-        var year = $(el).data('year');
-        var day = $(el).text();
-
-        month = month.toString().length < 2 ? "0" + month.toString() : month.toString();
-        day = day.length < 2 ? "0" + day : day;
-        year = year.toString();
-
-        var date = month + "/" + day + "/" + year;
-
-        return date;
     }
 
     MyDatepicker.prototype.init = function(){
@@ -147,6 +152,9 @@ $(document).ready(function(){
                 self.lastClick.date = date;
                 self.lastClick.added = dateAdded;
                 self.lastClick.rangeClosed = rangeClosed;
+            },
+            beforeShow: function(x, y, z) {
+                console.log('beforeShow')
             }
         });
         
@@ -154,31 +162,82 @@ $(document).ready(function(){
 
         $('#ui-datepicker-div').css('display', 'none');
 
-        this.$el.on('mousedown', 'td', function(){
-            self.mouseDown = true;
-            var date1 = readDateFromTD(this);
+        
+
+        function dragstart( ev, dd ){
+            var month = $(this).data('month') + 1;
+            var year = $(this).data('year');
+            var day = $(this).text();
+
+            month = month.toString().length < 2 ? "0" + month.toString() : month.toString();
+            day = day.length < 2 ? "0" + day : day;
+            year = year.toString();
+
+            var date1 = month + "/" + day + "/" + year;
+
             self.dragDate1 = new Date(date1);
+            console.log(date1);
 
-            return false;
-        });
+            return $('<div class="selection" />')
+                .css('opacity', .65 )
+                .appendTo( document.body );
+        }
 
-        this.$el.on('mouseover', 'td', function(){
-            if (self.mouseDown) {
-                var date2 = readDateFromTD(this);
-                self.dragDate2 = new Date(date2);
-                $(this).children().css('background', 'blue')
-            }
-        });
+        function drag( ev, dd ){
+            $( dd.proxy ).css({
+                top: Math.min( ev.pageY, dd.startY ),
+                left: Math.min( ev.pageX, dd.startX ),
+                height: Math.abs( ev.pageY - dd.startY ),
+                width: Math.abs( ev.pageX - dd.startX )
+            });
+        }
 
-        $(document).mouseup(function(){
-            self.mouseDown = false;
-            if (self.dragDate1 && self.dragDate2) {
-                var range = getDatesRange(self.dragDate1, self.dragDate2);
-                self.dragDate1 = self.dragDate2 = null;
+        function dragend( ev, dd ){
+            $( dd.proxy ).remove();
+        }
 
-                self.$el.multiDatesPicker('addDates', range);
-            }
-        });
+        function dropstart(){
+            $( this ).addClass("selected");
+        }
+
+        function drop( ev, dd ){
+            var month = $(this).data('month') + 1;
+            var year = $(this).data('year');
+            var day = $(this).text();
+
+            month = month.toString().length < 2 ? "0" + month.toString() : month.toString();
+            day = day.length < 2 ? "0" + day : day;
+            year = year.toString();
+
+            var date2 = month + "/" + day + "/" + year;
+            console.log(date2);
+
+            var date1 = new Date(self.dragDate1);
+            date2 = new Date(date2);
+
+            var range = getDatesRange(date1, date2);
+            self.$el.multiDatesPicker('addDates', range);
+
+        }
+
+        function dropend(){
+            $( this ).removeClass("selected");
+        }
+
+        // delegated events: dragend, drop, dropend doesn't work for some reason (???)
+        // this.$el
+        // .on('dragstart', 'td[data-year]', dragstart)
+        // .on('drag', 'td[data-year]', drag)
+        // .on("dragend", 'td[data-year]', dragend);
+
+        // this.$el.on("dropstart", 'td[data-year]', dropstart)
+        // .on('drop', 'td[data-year]', drop)
+        // .on("dropend", 'td[data-year]', dropend);
+
+        $('td[data-year]').drag(drag).drag('start', dragstart).drag('end', dragend);
+        $('td[data-year]').drop(drop).drop('start', dropstart).drop('end', dropend);
+
+        $.drop({ multi: true, mode: "pointer" });
     }
 
     MyDatepicker.prototype.getDates = function() {
