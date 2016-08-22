@@ -155,7 +155,6 @@ $(document).ready(function(){
         $('#ui-datepicker-div').css('display', 'none');
 
         this.$el.on('mousedown touchstart', 'td', function(){
-            console.log('start', readDateFromTD(this))
             self.mouseDown = true;
             var date1 = readDateFromTD(this);
             self.dragDate1 = new Date(date1);
@@ -192,10 +191,22 @@ $(document).ready(function(){
                 // http://stackoverflow.com/a/33464547/1660185
                 var myLocation = event.originalEvent.changedTouches[0];
                 var realTarget = document.elementFromPoint(myLocation.clientX, myLocation.clientY);
-                console.log(realTarget);return;
-                console.log('move/over', readDateFromTD(el))
+                
+                var $el;
+                if ($(realTarget).is('td[data-year]')) {
+                    $el = $(realTarget); 
+                } else {
+                    $el = $(realTarget).parents('td[data-year]');
+                    if ($el.length) {
+                        $el = $el[0];
+                    } else {
+                        return;
+                    }
+                }
 
-                var date2 = readDateFromTD(el);
+                console.log('move/over', readDateFromTD($el))
+
+                var date2 = readDateFromTD($el);
                 self.dragDate2 = new Date(date2);
                 
                 var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
@@ -212,9 +223,7 @@ $(document).ready(function(){
         });
 
         $(document).on('mouseup touchend', function(){
-            return;
             self.mouseDown = false;
-            console.log('end')
             if (self.dragDate1 && self.dragDate2) {
                 var range = getDatesRange(self.dragDate1, self.dragDate2);
                 self.dragDate1 = self.dragDate2 = null;
