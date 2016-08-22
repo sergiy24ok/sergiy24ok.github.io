@@ -55,6 +55,7 @@ $(document).ready(function(){
         };
 
         this.state = [];
+        this.dragDate1 = null;
         this.options = options;
 
         this.init();
@@ -139,37 +140,81 @@ $(document).ready(function(){
         $('#ui-datepicker-div').css('display', 'none');
 
         // drag select init
-        $( document )
-        .drag("start",function( ev, dd ){
+
+        function dragstart( ev, dd ){
+            var month = $(this).data('month') + 1;
+            var year = $(this).data('year');
+            var day = $(this).text();
+
+            month = month.toString().length < 2 ? "0" + month.toString() : month.toString();
+            day = day.length < 2 ? "0" + day : day;
+            year = year.toString();
+
+            var date1 = month + "/" + day + "/" + year;
+
+            self.dragDate1 = new Date(date1);
+            console.log(date1);
+
             return $('<div class="selection" />')
                 .css('opacity', .65 )
                 .appendTo( document.body );
-        })
-        .drag(function( ev, dd ){
+        }
+
+        function drag( ev, dd ){
             $( dd.proxy ).css({
                 top: Math.min( ev.pageY, dd.startY ),
                 left: Math.min( ev.pageX, dd.startX ),
                 height: Math.abs( ev.pageY - dd.startY ),
                 width: Math.abs( ev.pageX - dd.startX )
             });
-        })
-        .drag("end",function( ev, dd ){
+        }
+
+        function dragend( ev, dd ){
             $( dd.proxy ).remove();
-        });
+        }
 
-        $('td[data-year]')
-            .drop("start",function(){
-                $( this ).addClass("selected");
-            })
-            .drop(function( ev, dd ){
-                //console.log(this);
-                console.log(dd);
-            })
-            .drop("end",function(){
-                $( this ).removeClass("selected");
-            });
+        function dropstart(){
+            $( this ).addClass("selected");
+        }
 
-        $.drop({ multi: true });
+        function drop( ev, dd ){
+            var month = $(this).data('month') + 1;
+            var year = $(this).data('year');
+            var day = $(this).text();
+
+            month = month.toString().length < 2 ? "0" + month.toString() : month.toString();
+            day = day.length < 2 ? "0" + day : day;
+            year = year.toString();
+
+            var date2 = month + "/" + day + "/" + year;
+            console.log(date2);
+
+            var date1 = new Date(self.dragDate1);
+            date2 = new Date(date2);
+
+            var range = getDatesRange(date1, date2);
+            self.$el.multiDatesPicker('addDates', range);
+
+        }
+
+        function dropend(){
+            $( this ).removeClass("selected");
+        }
+
+        // delegated events: dragend, drop, dropend doesn't work for some reason (???)
+        // this.$el
+        // .on('dragstart', 'td[data-year]', dragstart)
+        // .on('drag', 'td[data-year]', drag)
+        // .on("dragend", 'td[data-year]', dragend);
+
+        // this.$el.on("dropstart", 'td[data-year]', dropstart)
+        // .on('drop', 'td[data-year]', drop)
+        // .on("dropend", 'td[data-year]', dropend);
+
+        $('td[data-year]').drag(drag).drag('start', dragstart).drag('end', dragend);
+        $('td[data-year]').drop(drop).drop('start', dropstart).drop('end', dropend);
+
+        $.drop({ multi: true, mode: "pointer" });
     }
 
     MyDatepicker.prototype.getDates = function() {
