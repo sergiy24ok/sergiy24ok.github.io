@@ -137,6 +137,39 @@ $(document).ready(function(){
         this.$el.multiDatesPicker(options);
 
         $('#ui-datepicker-div').css('display', 'none');
+
+        // drag select init
+        $( document )
+        .drag("start",function( ev, dd ){
+            return $('<div class="selection" />')
+                .css('opacity', .65 )
+                .appendTo( document.body );
+        })
+        .drag(function( ev, dd ){
+            $( dd.proxy ).css({
+                top: Math.min( ev.pageY, dd.startY ),
+                left: Math.min( ev.pageX, dd.startX ),
+                height: Math.abs( ev.pageY - dd.startY ),
+                width: Math.abs( ev.pageX - dd.startX )
+            });
+        })
+        .drag("end",function( ev, dd ){
+            $( dd.proxy ).remove();
+        });
+
+        $('td[data-year]')
+            .drop("start",function(){
+                $( this ).addClass("selected");
+            })
+            .drop(function( ev, dd ){
+                //console.log(this);
+                console.log(dd);
+            })
+            .drop("end",function(){
+                $( this ).removeClass("selected");
+            });
+
+        $.drop({ multi: true });
     }
 
     MyDatepicker.prototype.getDates = function() {
