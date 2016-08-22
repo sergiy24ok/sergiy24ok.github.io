@@ -155,8 +155,7 @@ $(document).ready(function(){
         $('#ui-datepicker-div').css('display', 'none');
 
         this.$el.on('mousedown touchstart', 'td', function(){
-            $('#messages').append($('<p>').html('start'));
-            console.log(this)
+            console.log('start', readDateFromTD(this))
             self.mouseDown = true;
             var date1 = readDateFromTD(this);
             self.dragDate1 = new Date(date1);
@@ -166,8 +165,7 @@ $(document).ready(function(){
 
         this.$el.on('mouseover touchmove', 'td', function(){
             if (self.mouseDown) {
-                $('#messages').append($('<p>').html('move/hover'));
-                console.log(this);
+                console.log('move/over', readDateFromTD(this))
 
                 var date2 = readDateFromTD(this);
                 self.dragDate2 = new Date(date2);
@@ -188,8 +186,7 @@ $(document).ready(function(){
 
         $(document).on('mouseup touchend', function(){
             self.mouseDown = false;
-            $('#messages').append($('<p>').html('end'));
-            console.log(this)
+            console.log('end', readDateFromTD(this))
             if (self.dragDate1 && self.dragDate2) {
                 var range = getDatesRange(self.dragDate1, self.dragDate2);
                 self.dragDate1 = self.dragDate2 = null;
