@@ -50,7 +50,10 @@ $(document).ready(function(){
 
         this.$el = el;
         this.isShift = false;
-        this.lastClick = {};
+        this.lastClick = {
+            rangeClosed: false
+        };
+
         this.state = [];
         this.options = options;
 
@@ -75,6 +78,7 @@ $(document).ready(function(){
         var options = this.options || {};
         $.extend(options, {
             onSelect: function(date, dateObj){
+                console.log('onSelect')
 
                 // state of datepicker: array of all dates selected
                 var state = $(this).multiDatesPicker('getDates');
@@ -91,22 +95,19 @@ $(document).ready(function(){
 
                 var range;
 
+                // this indicates whether current click created range (either selected dates or removed)
+                var rangeClosed = false;
+
                 // if previous click added date and shift is pressed: add range
-                if (self.lastClick.added && self.isShift && self.lastClick.date && self.lastClick.date.toString() != date.toString()) {
+                if (self.lastClick.added && self.isShift && !self.lastClick.rangeClosed && self.lastClick.date && self.lastClick.date.toString() != date.toString()) {
                     range = getDatesRange(self.lastClick.date, date);
 
                     self.$el.multiDatesPicker('addDates', range);
-                    // for (i = 0; i < range.length; i++) {
-                    //     if (!includesDate(state, range[i])) {
-                    //         self.$el.multiDatesPicker('addDates', [range[i]]);
-
-                    //     }
-                    // }
-
+                    rangeClosed = true;
                 }
 
                 // if previous click removed date and shift is pressed: remove range (if all dates between selected)
-                if (!self.lastClick.added && self.isShift && self.lastClick.date && self.lastClick.date.toString() != date.toString()) {
+                if (!self.lastClick.added && self.isShift && !self.lastClick.rangeClosed && self.lastClick.date && self.lastClick.date.toString() != date.toString()) {
 
                     range = getDatesRange(self.lastClick.date, date);
                     range.pop();
@@ -120,6 +121,7 @@ $(document).ready(function(){
 
                     if (doRemoveRange) {
                         self.$el.multiDatesPicker('removeDates', range);
+                        rangeClosed = true;
                     }
                     
                 }
@@ -127,6 +129,7 @@ $(document).ready(function(){
 
                 self.lastClick.date = date;
                 self.lastClick.added = dateAdded;
+                self.lastClick.rangeClosed = rangeClosed;
 
             }
         });
