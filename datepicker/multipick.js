@@ -136,7 +136,7 @@ $(document).ready(function(){
         
         this.$el.multiDatesPicker(options);
 
-        $('#ui-datepicker-div').remove();
+        $('#ui-datepicker-div').css('display', 'none');
     }
 
     MyDatepicker.prototype.getDates = function() {
