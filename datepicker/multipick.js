@@ -163,7 +163,9 @@ $(document).ready(function(){
             return false;
         });
 
-        this.$el.on('mouseover touchenter', 'td', function(){
+
+
+        this.$el.on('mouseover', 'td', function(){
             if (self.mouseDown) {
                 console.log('move/over', readDateFromTD(this))
 
@@ -181,6 +183,28 @@ $(document).ready(function(){
                 });
 
                 //$(this).addClass('pre-selected');
+            }
+        });
+
+        this.$el.on('touchmove', function(event){
+            if (self.mouseDown) {
+
+                var el = document.elementFromPoint(event.clientX, event.clientY);
+                console.log('move/over', readDateFromTD(el))
+
+                var date2 = readDateFromTD(el);
+                self.dragDate2 = new Date(date2);
+                
+                var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
+                $('.pre-selected').removeClass('pre-selected');
+                self.$el.find('td[data-year]').each(function(index, el){
+                    var elDate = readDateFromTD(el);
+                    elDate = new Date(elDate);
+                    if (includesDate(dragRange, elDate)){
+                        $(el).addClass('pre-selected')
+                    }
+                });
+
             }
         });
 
