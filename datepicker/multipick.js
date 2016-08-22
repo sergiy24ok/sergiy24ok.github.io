@@ -78,6 +78,16 @@ $(document).ready(function(){
         return date;
     }
 
+    MyDatepicker.prototype.getState = function(){
+        var state = this.$el.multiDatesPicker('getDates');
+        var i;
+        for (i = 0; i < state.length; i++) {
+            state[i] = new Date(state[i]);
+        }
+
+        return state;
+    }
+
     MyDatepicker.prototype.init = function(){
         var self = this;
 
@@ -97,12 +107,8 @@ $(document).ready(function(){
         $.extend(options, {
             onSelect: function(date, dateObj){
 
-                // state of datepicker: array of all dates selected
-                var state = $(this).multiDatesPicker('getDates');
-                var i;
-                for (i = 0; i < state.length; i++) {
-                    state[i] = new Date(state[i]);
-                }
+                var state = self.getState();
+
                 date = new Date(date);
                 
                 var dateAdded = false;
@@ -166,8 +172,6 @@ $(document).ready(function(){
 
         this.$el.on('mouseover', 'td', function(){
             if (self.mouseDown) {
-                
-
                 var date2 = readDateFromTD(this);
                 self.dragDate2 = new Date(date2);
                 
@@ -204,8 +208,6 @@ $(document).ready(function(){
                     }
                 }
 
-                console.log('move/over', readDateFromTD($el))
-
                 var date2 = readDateFromTD($el);
                 self.dragDate2 = new Date(date2);
                 
@@ -228,7 +230,15 @@ $(document).ready(function(){
                 var range = getDatesRange(self.dragDate1, self.dragDate2);
                 self.dragDate1 = self.dragDate2 = null;
 
-                self.$el.multiDatesPicker('addDates', range);
+                console.log(self.getState());
+                var state = self.getState();
+                var isAddRange = range.some(function(el, index, arr){
+                    return !includesDate(state, el);
+                });
+
+                var action = isAddRange ? 'addDates' : 'removeDates';
+
+                self.$el.multiDatesPicker(action, range);
             }
         });
     }
