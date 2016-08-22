@@ -189,8 +189,10 @@ $(document).ready(function(){
         this.$el.on('touchmove', function(event){
             if (self.mouseDown) {
 
-                var el = document.elementFromPoint(event.clientX, event.clientY);
-                console.log(el);return;
+                // http://stackoverflow.com/a/33464547/1660185
+                var myLocation = event.originalEvent.changedTouches[0];
+                var realTarget = document.elementFromPoint(myLocation.clientX, myLocation.clientY);
+                console.log(realTarget);return;
                 console.log('move/over', readDateFromTD(el))
 
                 var date2 = readDateFromTD(el);
