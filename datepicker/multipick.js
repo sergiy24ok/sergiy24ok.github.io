@@ -154,7 +154,7 @@ $(document).ready(function(){
 
         $('#ui-datepicker-div').css('display', 'none');
 
-        this.$el.on('mousedown', 'td', function(){
+        this.$el.on('mousedown touchstart', 'td', function(){
             self.mouseDown = true;
             var date1 = readDateFromTD(this);
             self.dragDate1 = new Date(date1);
@@ -162,7 +162,7 @@ $(document).ready(function(){
             return false;
         });
 
-        this.$el.on('mouseover', 'td', function(){
+        this.$el.on('mouseover touchmove', 'td', function(){
             if (self.mouseDown) {
                 var date2 = readDateFromTD(this);
                 self.dragDate2 = new Date(date2);
@@ -181,7 +181,7 @@ $(document).ready(function(){
             }
         });
 
-        $(document).mouseup(function(){
+        $(document).on('mouseup touchend', function(){
             self.mouseDown = false;
             if (self.dragDate1 && self.dragDate2) {
                 var range = getDatesRange(self.dragDate1, self.dragDate2);
@@ -201,8 +201,8 @@ $(document).ready(function(){
     }    
 
 
-    window.picker = new MyDatepicker('#datepicker', {numberOfMonths: [1, 3]});
-    
+    // window.picker = new MyDatepicker('#datepicker', {numberOfMonths: [1, 3]});
+    window.picker = new MyDatepicker('#datepicker');
 
 
 });
