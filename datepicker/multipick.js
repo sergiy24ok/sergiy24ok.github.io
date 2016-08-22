@@ -255,6 +255,6 @@ var nameItAsYouWish = (function ($) {
 }(jQuery));
 
 $(document).ready(function(){
-    // window.picker = new MyDatepicker('#datepicker', {numberOfMonths: [1, 3]});
-    window.picker = new nameItAsYouWish('#datepicker');
+    window.picker = new nameItAsYouWish('#datepicker', {numberOfMonths: [1, 2]});
+    //window.picker = new nameItAsYouWish('#datepicker');
 });
