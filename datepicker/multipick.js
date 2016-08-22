@@ -163,7 +163,7 @@ $(document).ready(function(){
             return false;
         });
 
-        this.$el.on('mouseover touchmove', 'td', function(){
+        this.$el.on('mouseover touchenter', 'td', function(){
             if (self.mouseDown) {
                 console.log('move/over', readDateFromTD(this))
 
