@@ -166,7 +166,18 @@ $(document).ready(function(){
             if (self.mouseDown) {
                 var date2 = readDateFromTD(this);
                 self.dragDate2 = new Date(date2);
-                $(this).children().css('background', 'blue')
+                
+                var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
+                $('.pre-selected').removeClass('pre-selected');
+                self.$el.find('td[data-year]').each(function(index, el){
+                    var elDate = readDateFromTD(el);
+                    elDate = new Date(elDate);
+                    if (includesDate(dragRange, elDate)){
+                        $(el).addClass('pre-selected')
+                    }
+                });
+
+                //$(this).addClass('pre-selected');
             }
         });
 
