@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+var nameItAsYouWish = (function ($) {
     
     // lookup array of date objects for given date
     function includesDate(arr, needle) {
@@ -251,9 +251,10 @@ $(document).ready(function(){
         return this.$el;
     }    
 
+    return MyDatepicker;
+}(jQuery));
 
+$(document).ready(function(){
     // window.picker = new MyDatepicker('#datepicker', {numberOfMonths: [1, 3]});
-    window.picker = new MyDatepicker('#datepicker');
-
-
+    window.picker = new nameItAsYouWish('#datepicker');
 });
