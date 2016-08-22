@@ -190,6 +190,7 @@ $(document).ready(function(){
             if (self.mouseDown) {
 
                 var el = document.elementFromPoint(event.clientX, event.clientY);
+                console.log(el);return;
                 console.log('move/over', readDateFromTD(el))
 
                 var date2 = readDateFromTD(el);
