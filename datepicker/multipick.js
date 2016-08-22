@@ -167,7 +167,7 @@ $(document).ready(function(){
 
         this.$el.on('mouseover', 'td', function(){
             if (self.mouseDown) {
-                console.log('move/over', readDateFromTD(this))
+                
 
                 var date2 = readDateFromTD(this);
                 self.dragDate2 = new Date(date2);
@@ -210,6 +210,7 @@ $(document).ready(function(){
         });
 
         $(document).on('mouseup touchend', function(){
+            return;
             self.mouseDown = false;
             console.log('end')
             if (self.dragDate1 && self.dragDate2) {
