@@ -43,7 +43,7 @@ var nameItAsYouWish = (function ($) {
         return dateArray;
     }
 
-    // Pass either element or selector.
+    // Pass either element or selector as first param. For options reference see http://multidatespickr.sourceforge.net 
     function MyDatepicker(el, options) {
         if ('string' == typeof el) {
             el = $(el);
@@ -158,6 +158,7 @@ var nameItAsYouWish = (function ($) {
         
         this.$el.multiDatesPicker(options);
 
+        // Hide emty artefact div
         $('#ui-datepicker-div').css('display', 'none');
 
         this.$el.on('mousedown touchstart', 'td', function(){
@@ -168,15 +169,13 @@ var nameItAsYouWish = (function ($) {
             return false;
         });
 
-
-
         this.$el.on('mouseover', 'td', function(){
             if (self.mouseDown) {
                 var date2 = readDateFromTD(this);
                 self.dragDate2 = new Date(date2);
                 
                 var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
-                $('.pre-selected').removeClass('pre-selected');
+                self.$el.find('.pre-selected').removeClass('pre-selected');
                 self.$el.find('td[data-year]').each(function(index, el){
                     var elDate = readDateFromTD(el);
                     elDate = new Date(elDate);
@@ -184,8 +183,6 @@ var nameItAsYouWish = (function ($) {
                         $(el).addClass('pre-selected')
                     }
                 });
-
-                //$(this).addClass('pre-selected');
             }
         });
 
@@ -212,7 +209,7 @@ var nameItAsYouWish = (function ($) {
                 self.dragDate2 = new Date(date2);
                 
                 var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
-                $('.pre-selected').removeClass('pre-selected');
+                self.$el.find('.pre-selected').removeClass('pre-selected');
                 self.$el.find('td[data-year]').each(function(index, el){
                     var elDate = readDateFromTD(el);
                     elDate = new Date(elDate);
@@ -230,7 +227,6 @@ var nameItAsYouWish = (function ($) {
                 var range = getDatesRange(self.dragDate1, self.dragDate2);
                 self.dragDate1 = self.dragDate2 = null;
 
-                console.log(self.getState());
                 var state = self.getState();
                 var isAddRange = range.some(function(el, index, arr){
                     return !includesDate(state, el);
@@ -253,8 +249,3 @@ var nameItAsYouWish = (function ($) {
 
     return MyDatepicker;
 }(jQuery));
-
-$(document).ready(function(){
-    window.picker = new nameItAsYouWish('#datepicker', {numberOfMonths: [1, 2]});
-    //window.picker = new nameItAsYouWish('#datepicker');
-});

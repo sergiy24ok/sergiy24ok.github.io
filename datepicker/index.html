@@ -27,13 +27,13 @@
     <script type="text/javascript" src="assets/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="assets/jquery-ui-1.12.0/jquery-ui.min.js"></script>
     <script type="text/javascript" src="assets/MultiDatesPicker-v1.6.3/jquery-ui.multidatespicker.js"></script>
-    <!--
-    <script type="text/javascript" src="assets/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    -->
     <script type="text/javascript" src="multipick.js"></script>
-    <div id="messages">
-
-    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            window.picker = new nameItAsYouWish('#datepicker', {numberOfMonths: [1, 2]});
+            //window.picker = new nameItAsYouWish('#datepicker');
+        });
+    </script>
 </script>
 </body>
 </html>
