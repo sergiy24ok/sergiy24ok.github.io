@@ -161,7 +161,16 @@ var nameItAsYouWish = (function ($) {
         // Hide emty artefact div
         $('#ui-datepicker-div').css('display', 'none');
 
-        this.$el.on('mousedown touchstart', 'td', function(){
+        this.$el.on('mousedown touchstart', 'td', function(e){
+            // http://www.quirksmode.org/js/events_properties.html#link6
+            var rightclick;
+            if (!e) var e = window.event;
+            if (e.which) rightclick = (e.which == 3);
+            else if (e.button) rightclick = (e.button == 2);
+            if (rightclick) {
+                return false;
+            }
+
             self.mouseDown = true;
             var date1 = readDateFromTD(this);
             self.dragDate1 = new Date(date1);
