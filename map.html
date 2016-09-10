@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 500px;
+            height: 500px;
+            margin: 10px;
+        }
+
+        #pac-input {
+            height: 40px;
+            padding: 5px;
+            margin: 10px;
+            width: 500px;
+            font-size: 14px;
+        }
+
+        #info {
+            width: 300px;
+            border: 1px solid black;
+            border-radius: 13px;
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            padding: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+      
+    </style>
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+
+    
+    <div id="map"></div>
+
+    <div id="info">
+        <p>Country: <span id="country"></span></p>
+        <p>City: <span id="city"></span></p>
+        <p>lat: <span id="lat"></span></p>
+        <p>lng: <span id="lng"></span></p>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR7yOKTMPlGpUKrzu54jmyqcLGetJZios&libraries=places&callback=initMap"
+            async defer></script>
+    <script>
+        function initMap(){
+            var options = {
+              center: {lat: 50.29, lng: 18.22},
+              zoom: 2
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+            var input = document.getElementById('pac-input');
+            var autocomplete = new google.maps.places.Autocomplete(input, {
+                types: ['(cities)']
+            });
+
+            var marker;
+            marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29),
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+            });
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                var place = autocomplete.getPlace();
+                 console.log(place);
+
+                for (var i=0; i<place.address_components.length;i++) {
+                    if (place.address_components[i].types[0] == 'locality') {
+                        document.getElementById('city').innerHTML = place.address_components[i].long_name;
+                    }
+
+                    if (place.address_components[i].types[0] == 'country') {
+                        document.getElementById('country').innerHTML = place.address_components[i].long_name;
+                    }
+                } 
+                if (!place.geometry) {
+                  return;
+                }
+
+                document.getElementById('lat').innerHTML = place.geometry.location.lat();
+                document.getElementById('lng').innerHTML = place.geometry.location.lng();
+
+                if (place.geometry.viewport) {
+                  map.fitBounds(place.geometry.viewport);
+                } else {
+                  map.setCenter(place.geometry.location);
+                  map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function() {
+                var pos = marker.getPosition();
+                document.getElementById('lat').innerHTML = pos.lat();
+                document.getElementById('lng').innerHTML = pos.lng();
+
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode ({
+                    latLng: pos
+                }, 
+                function(results, status) {
+                    // console.log(results, status);
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var itemLocality='';
+
+                        // http://stackoverflow.com/questions/6359995/get-city-from-geocoder-results
+                        for(var i=0;i<results.length;i++) {
+                            var address_component = results[i];
+
+                            if (address_component.types[0] == "locality"){
+                                document.getElementById('pac-input').value = address_component.formatted_address;
+                                itemLocality = address_component.address_components;
+
+                                for (var j=0; j<itemLocality.length; j++) {
+                                    if (itemLocality[j].types[0] == 'locality') {
+                                        document.getElementById('city').innerHTML = itemLocality[j].long_name;
+                                    }
+
+                                    if (itemLocality[j].types[0] == 'country') {
+                                        document.getElementById('country').innerHTML = itemLocality[j].long_name;
+                                    }
+                                }
+                            }
+                        };
+
+                    } else {
+                        //
+                    }
+                });
+            });
+        }
+
+    </script>
+    
+  </body>
+</html>
