@@ -129,6 +129,7 @@
                             var address_component = results[i];
 
                             if (address_component.types[0] == "locality"){
+                                //autocomplete.set("place", address_component);
                                 document.getElementById('pac-input').value = address_component.formatted_address;
                                 itemLocality = address_component.address_components;
 

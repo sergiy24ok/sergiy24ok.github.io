@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video timer</title>
+</head>
+<body>
+    <h3>Seconds played: <span id="secs">0</span></h3>
+    <h4>Will be stopped on 20 seconds place</h4>
+    <iframe enablejsapi="1" style="border: 6px solid black;" width="560" id="player777" height="315" src="https://www.youtube.com/embed/7sxpKhIbr0E?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+    <script type="text/javascript">
+      var tag = document.createElement('script');
+      tag.id = 'iframe-demo';
+      tag.src = 'https://www.youtube.com/iframe_api';
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player777', {
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+        });
+      }
+      function onPlayerReady(event) {
+        document.getElementById('player777').style.borderColor = '#FF6D00';
+      }
+
+      function changeBorderColor(playerStatus) {
+        var color;
+        if (playerStatus == -1) {
+          color = "#37474F"; // unstarted = gray
+        } else if (playerStatus == 0) {
+          color = "#FFFF00"; // ended = yellow
+        } else if (playerStatus == 1) {
+          color = "#33691E"; // playing = green
+        } else if (playerStatus == 2) {
+          color = "#DD2C00"; // paused = red
+        } else if (playerStatus == 3) {
+          color = "#AA00FF"; // buffering = purple
+        } else if (playerStatus == 5) {
+          color = "#FF6DOO"; // video cued = orange
+        }
+        if (color) {
+          document.getElementById('player777').style.borderColor = color;
+        }
+      }
+
+      var itvl;
+
+
+      function onPlayerStateChange(event) {
+        
+        if (YT.PlayerState.PLAYING == event.data) {
+            itvl = setInterval(function(){
+                var time = player.getCurrentTime() | 0;
+                document.getElementById('secs').innerHTML = time;
+                if (time == 20) {
+                    player.stopVideo();
+                    alert('Chat !!!')
+                }
+            }, 500)
+            
+        } else {
+            clearInterval(itvl);
+        }
+        changeBorderColor(event.data);
+      }
+    </script>
+</body>
+</html>

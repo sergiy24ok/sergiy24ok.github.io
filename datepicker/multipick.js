@@ -1,5 +1,5 @@
 
-var nameItAsYouWish = (function ($) {
+var RooundDatePicker = (function ($) {
     
     // lookup array of date objects for given date
     function includesDate(arr, needle) {
@@ -9,6 +9,20 @@ var nameItAsYouWish = (function ($) {
         }
       }
       return false;
+    }
+
+    function includesDate(arr, needle) {
+        var d1, d2;
+        d1 = needle.toLocaleDateString("en-US", {day: "2-digit",month: "2-digit",  year: "numeric"});
+        
+        for(var i=0; i < arr.length; i++){
+            d2 = arr[i].toLocaleDateString("en-US", {day: "2-digit",month: "2-digit",  year: "numeric"});
+
+            if( d1 == d2 ){
+                return true;
+            }
+        }
+        return false;
     }
 
     // returns array of dates between two given dates, including these two
@@ -185,12 +199,15 @@ var nameItAsYouWish = (function ($) {
                 
                 var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
                 self.$el.find('.pre-selected').removeClass('pre-selected');
-                self.$el.find('td[data-year]').each(function(index, el){
-                    var elDate = readDateFromTD(el);
-                    elDate = new Date(elDate);
-                    if (includesDate(dragRange, elDate)){
-                        $(el).addClass('pre-selected')
-                    }
+                
+                $.each(dragRange, function(i, el){
+                    var day = el.getDate();
+                    var month = el.getMonth();
+                    var year = el.getFullYear();
+
+                    $('td[data-year="'+year+'"][data-month="'+month+'"]').filter(function(){
+                        return $('a', this).text() == day;
+                    }).addClass('pre-selected');
                 });
             }
         });
@@ -219,12 +236,15 @@ var nameItAsYouWish = (function ($) {
                 
                 var dragRange = getDatesRange(new Date(self.dragDate1), new Date(self.dragDate2));
                 self.$el.find('.pre-selected').removeClass('pre-selected');
-                self.$el.find('td[data-year]').each(function(index, el){
-                    var elDate = readDateFromTD(el);
-                    elDate = new Date(elDate);
-                    if (includesDate(dragRange, elDate)){
-                        $(el).addClass('pre-selected')
-                    }
+                
+                $.each(dragRange, function(i, el){
+                    var day = el.getDate();
+                    var month = el.getMonth();
+                    var year = el.getFullYear();
+
+                    $('td[data-year="'+year+'"][data-month="'+month+'"]').filter(function(){
+                        return $('a', this).text() == day;
+                    }).addClass('pre-selected');
                 });
 
             }
@@ -254,6 +274,42 @@ var nameItAsYouWish = (function ($) {
 
     MyDatepicker.prototype.getEl = function() {
         return this.$el;
+    }
+
+    MyDatepicker.prototype.numberOfMonths = function(param){
+        var dates = this.getDates();
+        
+        if (this.options.hasOwnProperty('numberOfMonths')) {
+
+            // do not refresh if numberOfMunths did not change
+            if (Number.isInteger(this.options.numberOfMonths) && Number.isInteger(param) && this.options.numberOfMonths == param) {
+                return;
+            }
+            if (Array.isArray(this.options.numberOfMonths) && Array.isArray(param) && this.options.numberOfMonths[0] == param[0] && this.options.numberOfMonths[1] == param[1]) {
+                return;
+            }
+
+            delete this.options.numberOfMonths;
+        } else if (!param) {
+            return;
+        }
+
+        if (Array.isArray(param) && 2 == param.length) {
+            this.options.numberOfMonths = param;
+        }
+
+        if (Number.isInteger(param) && param >= 1 && param <=12) {
+            this.options.numberOfMonths = param;
+        }
+
+        this.$el.multiDatesPicker('destroy');
+        this.$el.multiDatesPicker(this.options);
+
+        this.$el.multiDatesPicker('resetDates');
+
+        if (dates.length) {
+            this.$el.multiDatesPicker('addDates', dates);
+        }
     }    
 
     return MyDatepicker;
