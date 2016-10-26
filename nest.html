@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://select2.github.io/dist/js/select2.full.js"></script>
+	<script src="http://requirejs.org/docs/release/2.3.2/minified/require.js"></script>
+	<link rel="stylesheet" href="https://select2.github.io/dist/css/select2.min.css">
+	<style>
+		#select2{
+	        display: block;
+		    width: 50%;
+		    background-color: white;
+		    min-width: 100px;
+		    height: 20px;
+		    border: 1px solid black;
+		    border-radius: 2px;
+		}
+	</style>
+</head>
+<body>
+	
+
+	<script>
+		var data = {
+   "0":{
+      "text":"Annex",
+      "id":"annex"
+   },
+   "1":{
+      "text":"Beaconsfield Village",
+      "id":"beaconsfield-village"
+   },
+   "2":{
+      "text":"Bloordale Village",
+      "id":"bloordale-village"
+   },
+   "3":{
+      "text":"Casa Loma",
+      "id":"casa-loma"
+   },
+   "4":{
+      "text":"Corktown",
+      "id":"corktown"
+   },
+   "5":{
+      "text":"Downtown Core",
+      "id":"downtown-core"
+   },
+   "6":{
+      "text":"Dufferin Grove",
+      "id":"dufferin-grove"
+   },
+   "7":{
+      "text":"Entertainment District",
+      "id":"entertainment-district"
+   },
+   "8":{
+      "text":"Fashion District",
+      "id":"fashion-district"
+   },
+   "9":{
+      "text":"Financial District",
+      "id":"financial-district"
+   },
+   "10":{
+      "text":"Harbourfront",
+      "id":"harbourfront"
+   },
+   "11":{
+      "text":"High Park",
+      "id":"high-park"
+   },
+   "12":{
+      "text":"Junction",
+      "id":"junction"
+   },
+   "13":{
+      "text":"Kensington Market",
+      "id":"kensington-market"
+   },
+   "14":{
+      "text":"Little Italy",
+      "id":"little-italy"
+   },
+   "15":{
+      "text":"Midtown",
+      "id":"midtown"
+   },
+   "16":{
+      "text":"Mirvish Village",
+      "id":"mirvish-village",
+      "children":[
+         {
+            "id":"seaton-village",
+            "text":"Seaton Village"
+         }
+      ]
+   },
+   "17":{
+      "text":"Parkdale",
+      "id":"parkdale"
+   },
+   "18":{
+      "text":"Riverdale",
+      "id":"riverdale"
+   },
+   "19":{
+      "text":"Scarborough",
+      "id":"scarborough"
+   },
+   "20":{
+      "text":"St Lawrence Market",
+      "id":"st-lawrence-market"
+   },
+   "21":{
+      "text":"Sunnybrook",
+      "id":"sunnybrook"
+   },
+   "22":{
+      "text":"The Beach",
+      "id":"the-beach"
+   },
+   "23":{
+      "text":"Toronto Island",
+      "id":"toronto-island"
+   },
+   "24":{
+      "text":"Trinity Bellwoods",
+      "id":"trinity-bellwoods"
+   },
+   "25":{
+      "text":"University of Toronto",
+      "id":"university-of-toronto"
+   },
+   "26":{
+      "text":"Wellington Place",
+      "id":"wellington-place"
+   },
+   "27":{
+      "text":"West Queen West",
+      "id":"west-queen-west"
+   },
+   "28":{
+      "text":"Woodbridge",
+      "id":"woodbridge"
+   },
+   "29":{
+      "text":"Yorkville",
+      "id":"yorkville"
+   },
+   "30":{
+      "text":"New South Wales",
+      "id":"new-south-wales",
+      "children":[
+         {
+            "id":"armidale",
+            "text":"Armidale"
+         },
+         {
+            "id":"bathurst",
+            "text":"Bathurst"
+         },
+         {
+            "id":"bourke-cobar-coonamble",
+            "text":"Bourke - Cobar - Coonamble"
+         },
+         {
+            "id":"broken-hill-and-far-west",
+            "text":"Broken Hill and Far West"
+         },
+         {
+            "id":"capital-region",
+            "text":"Capital Region"
+         },
+         {
+            "id":"central-west",
+            "text":"Central West"
+         },
+         {
+            "id":"coffs-harbour",
+            "text":"Coffs Harbour"
+         },
+         {
+            "id":"coffs-harbour-grafton",
+            "text":"Coffs Harbour - Grafton"
+         },
+         {
+            "id":"dubbo",
+            "text":"Dubbo"
+         },
+         {
+            "id":"hunter-valley",
+            "text":"Hunter Valley"
+         },
+         {
+            "id":"illawarra",
+            "text":"Illawarra"
+         },
+         {
+            "id":"inverell-tenterfield",
+            "text":"Inverell - Tenterfield"
+         },
+         {
+            "id":"lake-macquarie",
+            "text":"Lake Macquarie"
+         },
+         {
+            "id":"maitland",
+            "text":"Maitland"
+         },
+         {
+            "id":"mid-north-coast",
+            "text":"Mid North Coast"
+         },
+         {
+            "id":"moree-narrabri",
+            "text":"Moree - Narrabri"
+         },
+         {
+            "id":"murray",
+            "text":"Murray"
+         },
+         {
+            "id":"newcastle",
+            "text":"Newcastle"
+         },
+         {
+            "id":"newcastle-and-lake-macquarie",
+            "text":"Newcastle and Lake Macquarie"
+         },
+         {
+            "id":"orange",
+            "text":"Orange"
+         },
+         {
+            "id":"port-macquarie",
+            "text":"Port Macquarie"
+         },
+         {
+            "id":"port-stephens",
+            "text":"Port Stephens"
+         },
+         {
+            "id":"richmond-tweed",
+            "text":"Richmond - Tweed"
+         },
+         {
+            "id":"riverina",
+            "text":"Riverina"
+         },
+         {
+            "id":"snowy-mountains",
+            "text":"Snowy Mountains"
+         },
+         {
+            "id":"south-coast",
+            "text":"South Coast"
+         },
+         {
+            "id":"southern-highlands",
+            "text":"Southern Highlands"
+         },
+         {
+            "id":"southern-highlands-and-shoalhaven",
+            "text":"Southern Highlands and Shoalhaven"
+         },
+         {
+            "id":"tamworth-gunnedah",
+            "text":"Tamworth - Gunnedah"
+         },
+         {
+            "id":"tweed",
+            "text":"Tweed"
+         },
+         {
+            "id":"wollongong",
+            "text":"Wollongong"
+         },
+         {
+            "id":"byron-bay",
+            "text":"Byron Bay",
+            "children":[
+               {
+                  "id":"ballina",
+                  "text":"Ballina"
+               }
+            ]
+         },
+         {
+            "id":"sydney",
+            "text":"Sydney",
+            "children":[
+               {
+                  "id":"baulkham-hills-and-hawkesbury",
+                  "text":"Baulkham Hills and Hawkesbury"
+               },
+               {
+                  "id":"blacktown",
+                  "text":"Blacktown"
+               },
+               {
+                  "id":"blue-mountains",
+                  "text":"Blue Mountains"
+               },
+               {
+                  "id":"central-coast",
+                  "text":"Central Coast"
+               },
+               {
+                  "id":"city-and-inner-south",
+                  "text":"City and Inner South"
+               },
+               {
+                  "id":"eastern-suburbs",
+                  "text":"Eastern Suburbs"
+               },
+               {
+                  "id":"hawkesbury",
+                  "text":"Hawkesbury"
+               },
+               {
+                  "id":"inner-south-west",
+                  "text":"Inner South West"
+               },
+               {
+                  "id":"inner-west",
+                  "text":"Inner West"
+               },
+               {
+                  "id":"north-sydney-and-hornsby",
+                  "text":"North Sydney and Hornsby"
+               },
+               {
+                  "id":"northern-beaches",
+                  "text":"Northern Beaches"
+               },
+               {
+                  "id":"outer-south-west",
+                  "text":"Outer South West"
+               },
+               {
+                  "id":"outer-west-and-blue-mountains",
+                  "text":"Outer West and Blue Mountains"
+               },
+               {
+                  "id":"parramatta",
+                  "text":"Parramatta"
+               },
+               {
+                  "id":"penrith",
+                  "text":"Penrith"
+               },
+               {
+                  "id":"ryde",
+                  "text":"Ryde"
+               },
+               {
+                  "id":"south-west",
+                  "text":"South West"
+               },
+               {
+                  "id":"sutherland",
+                  "text":"Sutherland"
+               }
+            ]
+         }
+      ]
+   },
+   "31":{
+      "text":"Queensland",
+      "id":"queensland",
+      "children":[
+         {
+            "id":"cairns",
+            "text":"Cairns"
+         },
+         {
+            "id":"central-queensland",
+            "text":"Central Queensland"
+         },
+         {
+            "id":"coolangatta",
+            "text":"Coolangatta"
+         },
+         {
+            "id":"darling-downs-maranoa",
+            "text":"Darling Downs - Maranoa"
+         },
+         {
+            "id":"gladstone",
+            "text":"Gladstone"
+         },
+         {
+            "id":"gold-coast",
+            "text":"Gold Coast"
+         },
+         {
+            "id":"port-douglas-daintree",
+            "text":"Port Douglas - Daintree"
+         },
+         {
+            "id":"rockhampton",
+            "text":"Rockhampton"
+         },
+         {
+            "id":"surfers-paradise",
+            "text":"Surfers Paradise"
+         },
+         {
+            "id":"brisbane",
+            "text":"Brisbane",
+            "children":[
+               {
+                  "id":"bribie-beachmere",
+                  "text":"Bribie - Beachmere"
+               },
+               {
+                  "id":"caboolture",
+                  "text":"Caboolture"
+               },
+               {
+                  "id":"east",
+                  "text":"East"
+               },
+               {
+                  "id":"inner-city",
+                  "text":"Inner City"
+               },
+               {
+                  "id":"ipswich",
+                  "text":"Ipswich"
+               },
+               {
+                  "id":"logan-beaudesert",
+                  "text":"Logan - Beaudesert"
+               },
+               {
+                  "id":"moreton-bay-north",
+                  "text":"Moreton Bay - North"
+               },
+               {
+                  "id":"moreton-bay-south",
+                  "text":"Moreton Bay - South"
+               },
+               {
+                  "id":"north",
+                  "text":"North"
+               },
+               {
+                  "id":"south",
+                  "text":"South"
+               },
+               {
+                  "id":"west",
+                  "text":"West"
+               }
+            ]
+         },
+         {
+            "id":"rest-of-qld",
+            "text":"Rest of Qld",
+            "children":[
+               {
+                  "id":"bundaberg",
+                  "text":"Bundaberg"
+               },
+               {
+                  "id":"caloundra",
+                  "text":"Caloundra"
+               },
+               {
+                  "id":"gympie-cooloola",
+                  "text":"Gympie - Cooloola"
+               },
+               {
+                  "id":"hervey-bay",
+                  "text":"Hervey Bay"
+               },
+               {
+                  "id":"mackay",
+                  "text":"Mackay"
+               },
+               {
+                  "id":"mackay-isaac-whitsunday",
+                  "text":"Mackay - Isaac - Whitsunday"
+               },
+               {
+                  "id":"maroochy",
+                  "text":"Maroochy"
+               },
+               {
+                  "id":"noosa",
+                  "text":"Noosa"
+               },
+               {
+                  "id":"outback-rest-of-qld",
+                  "text":"Outback"
+               },
+               {
+                  "id":"sunshine-coast",
+                  "text":"Sunshine Coast"
+               },
+               {
+                  "id":"toowoomba",
+                  "text":"Toowoomba"
+               },
+               {
+                  "id":"townsville",
+                  "text":"Townsville"
+               },
+               {
+                  "id":"whitsunday",
+                  "text":"Whitsunday"
+               },
+               {
+                  "id":"wide-bay",
+                  "text":"Wide Bay"
+               }
+            ]
+         }
+      ]
+   },
+   "32":{
+      "text":"Victoria",
+      "id":"victoria",
+      "children":[
+         {
+            "id":"ballarat",
+            "text":"Ballarat"
+         },
+         {
+            "id":"bendigo",
+            "text":"Bendigo"
+         },
+         {
+            "id":"geelong",
+            "text":"Geelong"
+         },
+         {
+            "id":"hume",
+            "text":"Hume"
+         },
+         {
+            "id":"latrobe-gippsland",
+            "text":"Latrobe - Gippsland"
+         },
+         {
+            "id":"north-west",
+            "text":"North West"
+         },
+         {
+            "id":"shepparton",
+            "text":"Shepparton"
+         },
+         {
+            "id":"upper-goulburn-valley",
+            "text":"Upper Goulburn Valley"
+         },
+         {
+            "id":"warrnambool-and-south-west",
+            "text":"Warrnambool and South West"
+         },
+         {
+            "id":"melbourne",
+            "text":"Melbourne",
+            "children":[
+               {
+                  "id":"dandenong",
+                  "text":"Dandenong"
+               },
+               {
+                  "id":"frankston",
+                  "text":"Frankston"
+               },
+               {
+                  "id":"inner",
+                  "text":"Inner"
+               },
+               {
+                  "id":"inner-east",
+                  "text":"Inner East"
+               },
+               {
+                  "id":"inner-south",
+                  "text":"Inner South"
+               },
+               {
+                  "id":"melbourne-city",
+                  "text":"Melbourne City"
+               },
+               {
+                  "id":"mornington-peninsula",
+                  "text":"Mornington Peninsula"
+               },
+               {
+                  "id":"north-east",
+                  "text":"North East"
+               },
+               {
+                  "id":"north-west-melbourne",
+                  "text":"North West"
+               },
+               {
+                  "id":"outer-east",
+                  "text":"Outer East"
+               },
+               {
+                  "id":"south-east-melbourne",
+                  "text":"South East"
+               },
+               {
+                  "id":"west-melbourne",
+                  "text":"West"
+               }
+            ]
+         }
+      ]
+   },
+   "33":{
+      "text":"Australian Capital Territory",
+      "id":"australian-capital-territory-australian-capital-territory",
+      "children":[
+         {
+            "id":"canberra",
+            "text":"Canberra"
+         }
+      ]
+   },
+   "34":{
+      "text":"Northern Territory",
+      "id":"northern-territory",
+      "children":[
+         {
+            "id":"darwin",
+            "text":"Darwin",
+            "children":[
+               {
+                  "id":"darwin-darwin",
+                  "text":"Darwin"
+               }
+            ]
+         },
+         {
+            "id":"rest-of-nt",
+            "text":"Rest of NT",
+            "children":[
+               {
+                  "id":"alice-springs",
+                  "text":"Alice Springs"
+               },
+               {
+                  "id":"outback",
+                  "text":"Outback"
+               }
+            ]
+         }
+      ]
+   },
+   "35":{
+      "text":"Other Territories",
+      "id":"other-territories",
+      "children":[
+         {
+            "id":"other-territories-other-territories",
+            "text":"Other Territories",
+            "children":[
+               {
+                  "id":"christmas-island",
+                  "text":"Christmas Island"
+               },
+               {
+                  "id":"cocos-keeling-islands",
+                  "text":"Cocos (Keeling) Islands"
+               },
+               {
+                  "id":"jervis-bay",
+                  "text":"Jervis Bay"
+               },
+               {
+                  "id":"norfolk-island",
+                  "text":"Norfolk Island"
+               }
+            ]
+         }
+      ]
+   },
+   "36":{
+      "text":"South Australia",
+      "id":"south-australia",
+      "children":[
+         {
+            "id":"adelaide",
+            "text":"Adelaide",
+            "children":[
+               {
+                  "id":"central-and-hills",
+                  "text":"Central and Hills"
+               },
+               {
+                  "id":"north-adelaide",
+                  "text":"North"
+               },
+               {
+                  "id":"south-adelaide",
+                  "text":"South"
+               },
+               {
+                  "id":"west-adelaide",
+                  "text":"West"
+               }
+            ]
+         },
+         {
+            "id":"rest-of-sa",
+            "text":"Rest of SA",
+            "children":[
+               {
+                  "id":"barossa",
+                  "text":"Barossa"
+               },
+               {
+                  "id":"barossa-yorke-mid-north",
+                  "text":"Barossa - Yorke - Mid North"
+               },
+               {
+                  "id":"outback-rest-of-sa",
+                  "text":"Outback"
+               },
+               {
+                  "id":"south-east",
+                  "text":"South East"
+               }
+            ]
+         }
+      ]
+   },
+   "37":{
+      "text":"Tasmania",
+      "id":"tasmania",
+      "children":[
+         {
+            "id":"hobart",
+            "text":"Hobart",
+            "children":[
+               {
+                  "id":"hobart-hobart",
+                  "text":"Hobart"
+               }
+            ]
+         },
+         {
+            "id":"rest-of-tas",
+            "text":"Rest of Tas.",
+            "children":[
+               {
+                  "id":"launceston",
+                  "text":"Launceston"
+               },
+               {
+                  "id":"launceston-and-north-east",
+                  "text":"Launceston and North East"
+               },
+               {
+                  "id":"south-east-rest-of-tas",
+                  "text":"South East"
+               },
+               {
+                  "id":"west-and-north-west",
+                  "text":"West and North West"
+               }
+            ]
+         }
+      ]
+   },
+   "38":{
+      "text":"Western Australia",
+      "id":"western-australia",
+      "children":[
+         {
+            "id":"perth",
+            "text":"Perth",
+            "children":[
+               {
+                  "id":"cottesloe-claremont",
+                  "text":"Cottesloe - Claremont"
+               },
+               {
+                  "id":"fremantle",
+                  "text":"Fremantle"
+               },
+               {
+                  "id":"inner-perth",
+                  "text":"Inner"
+               },
+               {
+                  "id":"mandurah",
+                  "text":"Mandurah"
+               },
+               {
+                  "id":"north-east-perth",
+                  "text":"North East"
+               },
+               {
+                  "id":"north-west-perth",
+                  "text":"North West"
+               },
+               {
+                  "id":"rockingham",
+                  "text":"Rockingham"
+               },
+               {
+                  "id":"south-east-perth",
+                  "text":"South East"
+               },
+               {
+                  "id":"south-west-perth",
+                  "text":"South West"
+               }
+            ]
+         },
+         {
+            "id":"rest-of-wa",
+            "text":"Rest of WA",
+            "children":[
+               {
+                  "id":"albany",
+                  "text":"Albany"
+               },
+               {
+                  "id":"augusta-margaret-river-busselton",
+                  "text":"Augusta - Margaret River - Busselton"
+               },
+               {
+                  "id":"bunbury",
+                  "text":"Bunbury"
+               },
+               {
+                  "id":"esperance",
+                  "text":"Esperance"
+               },
+               {
+                  "id":"goldfields",
+                  "text":"Goldfields"
+               },
+               {
+                  "id":"kimberley",
+                  "text":"Kimberley"
+               },
+               {
+                  "id":"manjimup",
+                  "text":"Manjimup"
+               },
+               {
+                  "id":"pilbara",
+                  "text":"Pilbara"
+               }
+            ]
+         }
+      ]
+   }
+};
+
+var vals = Object.keys(data).map(function(key) {
+    return data[key];
+});
+
+function findId(id, data, res){
+   if (!res) res = [];
+   
+   var i;
+   for (i=0; i< data.length; i++) {
+       if (data[i].id == id) {
+           res.push({id: data[i].id, text: data[i].text});
+           return res;		
+       }
+
+       if (data[i].hasOwnProperty('children')) {
+       	   var resC = findId(id, data[i].children, res);
+           if (false !== resC) {
+           	  resC.push({id: data[i].id, text: data[i].text});
+              return resC;
+           }	
+       }
+   }
+
+   return false;
+}
+					
+
+          
+
+function matchStart(term, text, opt){
+	
+
+    if (text.toUpperCase().indexOf(term.toUpperCase()) >= 0) {
+      return true;
+    }
+
+    
+    var tree = findId(opt.id, vals, []);
+    for (i =0; i< tree.length; i++) {
+    	if (tree[i].text.toUpperCase().indexOf(term.toUpperCase()) >= 0) return true;
+    }
+    
+    return false;
+  }
+
+$.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+  $("#select2").select2({
+    matcher: oldMatcher(matchStart),
+    data: vals
+  })
+});
+      
+        
+    
+	</script>
+
+	<select id="select2"></select>
+</body>
+</html>
