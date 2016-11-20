@@ -10,10 +10,12 @@
 		}
 		
 		a:active {
-		    background-color: '#efefef';
+			background: #efefef;
 		}
-		
-		#prev, #next {
+
+		a {
+			display: inline-block;
+			box-sizing: border-box;
 			padding: 1em;
 			margin: .5em;
 			border: 1px solid black;
@@ -24,8 +26,17 @@
 	</style>
 </head>
 <body>
-	<a href="#" id="prev">Prev</a>
-	<a href="#" id="next">Next</a>
+	<div>
+		<a href="#" id="prev">Prev</a>
+		<a href="#" id="next">Next</a>
+		
+	</div>
+
+	<div>
+		<a href="#" id="first">First</a>
+		<a href="#" id="overview">Overview</a>
+		<a href="#" id="reward">Reward</a>
+	</div>
 	
 	<script  type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="sonic-server.js"></script>
@@ -35,10 +46,17 @@
 
 	<script>
 		$(function(){
+			var commands = {
+				prev: 'p',
+				next: 'n',
+				first: 'f',
+				overview: 'o',
+				reward: 'r'
+			}
 
 			var ACTIONS = ['prev', 'next', 'first', 'overview', 'reward'];
 			// Calculate the alphabet based on the emoticons.
-			var ALPHABET = generateAlphabet(ACTIONS);
+			//var ALPHABET = generateAlphabet(ACTIONS);
 
 			var sonicSocket;
 			var sonicServer;
@@ -59,7 +77,7 @@
 			    sonicSocket = new SonicSocket({alphabet: ALPHABET});
 			  }
 
-			  sonicServer.start();
+			  // sonicServer.start();
 			  // sonicServer.on('message', onIncomingEmoticon);
 			}
 
@@ -67,23 +85,36 @@
 		      freqMin: 440,
 		      freqMax: 1760
 		    });
-		    createSonicNetwork();
+		    sonicSocket = new SonicSocket({coder: coder});
+		    //createSonicNetwork();
 
-		    function generateAlphabet(list) {
-			  var alphabet = '';
-			  for (var i = 0; i < Math.min(list.length, 9); i++) {
-			    alphabet += i.toString();
-			  }
-			  return alphabet;
-			}
+		 //    function generateAlphabet(list) {
+			//   var alphabet = '';
+			//   for (var i = 0; i < Math.min(list.length, 9); i++) {
+			//     alphabet += i.toString();
+			//   }
+			//   return alphabet;
+			// }
 
 
 			$('#prev').click(function(){
-				sonicSocket.send('prev');
+				sonicSocket.send(commands.prev);
 			});
 
 			$('#next').click(function(){
-				sonicSocket.send('next');
+				sonicSocket.send(commands.next);
+			});
+
+			$('#first').click(function(){
+				sonicSocket.send(commands.first);
+			});
+
+			$('#overview').click(function(){
+				sonicSocket.send(commands.overview);
+			});
+
+			$('#reward').click(function(){
+				sonicSocket.send(commands.reward);
 			});
 		});
 	</script>
