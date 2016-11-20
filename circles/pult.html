@@ -23,9 +23,16 @@
 			width: 45%;
 			text-decoration: none;
 		}
+
+		.i {
+			position: fixed;
+			top: 1em;
+			right: 1em;
+		}
 	</style>
 </head>
 <body>
+	<div class="i"></div>
 	<div>
 		<a href="#" id="prev">Prev</a>
 		<a href="#" id="next">Next</a>
@@ -96,25 +103,29 @@
 			//   return alphabet;
 			// }
 
+			function sendCmd(cmd){
+				sonicSocket.send(cmd);
+				$('.i').text(cmd);
+			}
 
 			$('#prev').click(function(){
-				sonicSocket.send(commands.prev);
+				sendCmd(commands.prev);
 			});
 
 			$('#next').click(function(){
-				sonicSocket.send(commands.next);
+				sendCmd(commands.next);
 			});
 
 			$('#first').click(function(){
-				sonicSocket.send(commands.first);
+				sendCmd(commands.first);
 			});
 
 			$('#overview').click(function(){
-				sonicSocket.send(commands.overview);
+				sendCmd(commands.overview);
 			});
 
 			$('#reward').click(function(){
-				sonicSocket.send(commands.reward);
+				sendCmd(commands.reward);
 			});
 		});
 	</script>
