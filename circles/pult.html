@@ -8,6 +8,11 @@
 		body {
 			padding-top: 3em;
 		}
+		
+		a:active {
+		    background-color: '#efefef';
+		}
+		
 		#prev, #next {
 			padding: 1em;
 			margin: .5em;
@@ -79,7 +84,7 @@
 
 			$('#next').click(function(){
 				sonicSocket.send('next');
-			})
+			});
 		});
 	</script>
 </body>
