@@ -3,16 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Pult</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			padding-top: 3em;
+		}
+		#prev, #next {
+			padding: 1em;
+			margin: .5em;
+			border: 1px solid black;
+			border-radius: 5px;
+			width: 45%;
+			text-decoration: none;
+		}
+	</style>
 </head>
 <body>
 	<a href="#" id="prev">Prev</a>
 	<a href="#" id="next">Next</a>
 	
 	<script  type="text/javascript" src="jquery.js"></script>
-	<script type="text/javascript" src="sonic-server.js"></script>
-	<script type="text/javascript" src="sonic-socket.js"></script>
-	<script type="text/javascript" src="sonic-coder.js"></script>
-	<script type="text/javascript" src="ring-buffer.js"></script>
+	<script type="text/javascript" src="sonic/sonic-server.js"></script>
+	<script type="text/javascript" src="sonic/sonic-socket.js"></script>
+	<script type="text/javascript" src="sonic/sonic-coder.js"></script>
+	<script type="text/javascript" src="sonic/ring-buffer.js"></script>
 
 	<script>
 		$(function(){
