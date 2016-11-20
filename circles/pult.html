@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pult</title>
+</head>
+<body>
+	<a href="#" id="prev">Prev</a>
+	<a href="#" id="next">Next</a>
+	
+	<script  type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="sonic/sonic-server.js"></script>
+	<script type="text/javascript" src="sonic/sonic-socket.js"></script>
+	<script type="text/javascript" src="sonic/sonic-coder.js"></script>
+	<script type="text/javascript" src="sonic/ring-buffer.js"></script>
+
+	<script>
+		$(function(){
+
+			var ACTIONS = ['prev', 'next', 'first', 'overview', 'reward'];
+			// Calculate the alphabet based on the emoticons.
+			var ALPHABET = generateAlphabet(ACTIONS);
+
+			var sonicSocket;
+			var sonicServer;
+
+			createSonicNetwork();
+
+			function createSonicNetwork(opt_coder) {
+			  // Stop the sonic server if it is listening.
+			  //console.log(sonicServer);return;
+			  if (sonicServer) {
+			    //sonicServer.stop();
+			  }
+			  if (opt_coder) {
+			    sonicServer = new SonicServer({coder: opt_coder});
+			    sonicSocket = new SonicSocket({coder: opt_coder});
+			  } else {
+			    sonicServer = new SonicServer({alphabet: ALPHABET, debug: false});
+			    sonicSocket = new SonicSocket({alphabet: ALPHABET});
+			  }
+
+			  sonicServer.start();
+			  // sonicServer.on('message', onIncomingEmoticon);
+			}
+
+			var coder = new SonicCoder({
+		      freqMin: 440,
+		      freqMax: 1760
+		    });
+		    createSonicNetwork(coder);
+
+		    function generateAlphabet(list) {
+			  var alphabet = '';
+			  for (var i = 0; i < Math.min(list.length, 9); i++) {
+			    alphabet += i.toString();
+			  }
+			  return alphabet;
+			}
+
+
+			$('#prev').click(function(){
+				sonicSocket.send('prev');
+			});
+
+			$('#next').click(function(){
+				sonicSocket.send('next');
+			})
+		});
+	</script>
+</body>
+</html>
