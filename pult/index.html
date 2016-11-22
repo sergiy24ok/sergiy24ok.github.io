@@ -75,7 +75,7 @@
 					cmd = cmd[0];
 				}
 				sonicSocket.send(c.indexOf(cmd));
-				$('.i').text(cmd);
+				$('.i').text(cmd + ' ' + c.indexOf(cmd));
 				j++;
 			}
 
