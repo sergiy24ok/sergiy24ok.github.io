@@ -54,15 +54,7 @@
 	<script>
 		$(function(){
 
-			var commands = {
-				prev: 'p',
-				next: 'n',
-				first: 'f',
-				overview: 'o',
-				reward: 'r'
-			}
-
-			var c = ['p', 'n', 'f', 'o', 'r'];
+			var c = ['prev', 'next', 'first', 'overview', 'reward', 'p', 'n', 'f', 'o', 'r'];
 			var ALPHABET = generateAlphabet(c);
 
 			var sonicSocket;
@@ -77,29 +69,33 @@
 
 		    sonicSocket = new SonicSocket({ alphabet: ALPHABET});
 
+		    var i = 0;
 			function sendCmd(cmd){
+				if (0 == i % 2) {
+					cmd = cmd[1];
+				}
 				sonicSocket.send(c.indexOf(cmd));
 				$('.i').text(cmd);
 			}
 
 			$('#prev').click(function(){
-				sendCmd(commands.prev);
+				sendCmd('prev');
 			});
 
 			$('#next').click(function(){
-				sendCmd(commands.next);
+				sendCmd('next');
 			});
 
 			$('#first').click(function(){
-				sendCmd(commands.first);
+				sendCmd('first');
 			});
 
 			$('#overview').click(function(){
-				sendCmd(commands.overview);
+				sendCmd('overview');
 			});
 
 			$('#reward').click(function(){
-				sendCmd(commands.reward);
+				sendCmd('reward');
 			});
 		});
 	</script>
