@@ -72,7 +72,7 @@
 		    var j = 0;
 			function sendCmd(cmd){
 				if (0 == j % 2) {
-					cmd = cmd[1];
+					cmd = cmd[0];
 				}
 				sonicSocket.send(c.indexOf(cmd));
 				$('.i').text(cmd);
