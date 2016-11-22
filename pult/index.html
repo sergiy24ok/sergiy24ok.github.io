@@ -67,7 +67,16 @@
 		      freqMin: 440,
 		      freqMax: 1760
 		    });
-		    sonicSocket = new SonicSocket({coder:coder});
+
+		    function generateAlphabet(list) {
+			  var alphabet = '';
+			  for (var i = 0; i < Math.min(list.length, 9); i++) {
+			    alphabet += i.toString();
+			  }
+			  return alphabet;
+			}
+
+		    sonicSocket = new SonicSocket({coder:coder, , alphabet: generateAlphabet(['p', 'n', 'f', 'o', 'r'])});
 
 			function sendCmd(cmd){
 				sonicSocket.send(cmd);
