@@ -61,6 +61,8 @@
 				reward: 'r'
 			}
 
+			var ALPHABET = generateAlphabet(['p', 'n', 'f', 'o', 'r']]);
+
 			var sonicSocket;
 
 			var coder = new SonicCoder({
@@ -76,10 +78,10 @@
 			  return alphabet;
 			}
 
-		    sonicSocket = new SonicSocket({ alphabet: generateAlphabet(['p', 'n', 'f', 'o', 'r'])});
+		    sonicSocket = new SonicSocket({ alphabet: ALPHABET});
 
 			function sendCmd(cmd){
-				sonicSocket.send(cmd);
+				sonicSocket.send(ALPHABET.indexOf(cmd));
 				$('.i').text(cmd);
 			}
 
