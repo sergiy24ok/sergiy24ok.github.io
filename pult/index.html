@@ -69,13 +69,14 @@
 
 		    sonicSocket = new SonicSocket({ alphabet: ALPHABET});
 
-		    var i = 0;
+		    var j = 0;
 			function sendCmd(cmd){
-				if (0 == i % 2) {
+				if (0 == j % 2) {
 					cmd = cmd[1];
 				}
 				sonicSocket.send(c.indexOf(cmd));
 				$('.i').text(cmd);
+				j++;
 			}
 
 			$('#prev').click(function(){
