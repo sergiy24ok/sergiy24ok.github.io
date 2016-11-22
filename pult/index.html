@@ -53,6 +53,7 @@
 
 	<script>
 		$(function(){
+
 			var commands = {
 				prev: 'p',
 				next: 'n',
@@ -61,7 +62,8 @@
 				reward: 'r'
 			}
 
-			var ALPHABET = generateAlphabet(['p', 'n', 'f', 'o', 'r']);
+			var c = ['p', 'n', 'f', 'o', 'r'];
+			var ALPHABET = generateAlphabet(c);
 
 			var sonicSocket;
 
@@ -76,7 +78,7 @@
 		    sonicSocket = new SonicSocket({ alphabet: ALPHABET});
 
 			function sendCmd(cmd){
-				sonicSocket.send(ALPHABET.indexOf(cmd));
+				sonicSocket.send(c.indexOf(cmd));
 				$('.i').text(cmd);
 			}
 
