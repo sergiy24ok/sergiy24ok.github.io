@@ -16,11 +16,11 @@
 		a {
 			display: inline-block;
 			box-sizing: border-box;
-			padding: 1em;
+			padding: .5em;
 			margin: .5em;
 			border: 1px solid black;
 			border-radius: 5px;
-			width: 45%;
+			width: 40%;
 			text-decoration: none;
 		}
 
@@ -34,9 +34,8 @@
 <body>
 	<div class="i"></div>
 	<div>
-		<a href="#" id="prev">Prev</a>
-		<a href="#" id="next">Next</a>
-		
+		<a href="#" id="prev">&lt; Prev</a>
+		<a href="#" id="next">Next &gt;</a>
 	</div>
 
 	<div>
@@ -81,22 +80,27 @@
 
 			$('#prev').click(function(){
 				sendCmd('prev');
+				return false;
 			});
 
 			$('#next').click(function(){
 				sendCmd('next');
+				return false;
 			});
 
 			$('#first').click(function(){
 				sendCmd('first');
+				return false;
 			});
 
 			$('#overview').click(function(){
 				sendCmd('overview');
+				return false;
 			});
 
 			$('#reward').click(function(){
 				sendCmd('reward');
+				return false;
 			});
 		});
 	</script>
