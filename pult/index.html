@@ -78,7 +78,7 @@
 			  return alphabet;
 			}
 
-		    sonicSocket = new SonicSocket({ alphabet: ALPHABET});
+		    sonicSocket = new SonicSocket();
 
 			function sendCmd(cmd){
 				sonicSocket.send(ALPHABET.indexOf(cmd));
