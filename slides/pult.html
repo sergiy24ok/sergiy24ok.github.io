@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pult</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			padding-top: 3em;
+		}
+		
+		a:active {
+			background: #efefef;
+		}
+
+		a {
+			display: inline-block;
+			box-sizing: border-box;
+			padding: 1em;
+			margin: .5em;
+			border: 1px solid black;
+			border-radius: 5px;
+			width: 45%;
+			text-decoration: none;
+		}
+
+		.i {
+			position: fixed;
+			top: 1em;
+			right: 1em;
+		}
+	</style>
+</head>
+<body>
+	<div class="i"></div>
+	<div>
+		<a href="#" id="prev">Prev</a>
+		<a href="#" id="next">Next</a>
+		
+	</div>
+
+	<div>
+		<a href="#" id="first">First</a>
+		<a href="#" id="overview">Overview</a>
+		<a href="#" id="reward">Reward</a>
+	</div>
+	
+	<script  type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="sonic/sonic-server.js"></script>
+	<script type="text/javascript" src="sonic/sonic-socket.js"></script>
+	<script type="text/javascript" src="sonic/sonic-coder.js"></script>
+	<script type="text/javascript" src="sonic/ring-buffer.js"></script>
+
+	<script>
+		$(function(){
+			var commands = {
+				prev: 'p',
+				next: 'n',
+				first: 'f',
+				overview: 'o',
+				reward: 'r'
+			}
+
+			var ACTIONS = ['prev', 'next', 'first', 'overview', 'reward'];
+			// Calculate the alphabet based on the emoticons.
+			//var ALPHABET = generateAlphabet(ACTIONS);
+
+			var sonicSocket;
+			var sonicServer;
+
+			createSonicNetwork();
+
+			function createSonicNetwork(opt_coder) {
+			  // Stop the sonic server if it is listening.
+			  //console.log(sonicServer);return;
+			  if (sonicServer) {
+			    //sonicServer.stop();
+			  }
+			  if (opt_coder) {
+			    sonicServer = new SonicServer({coder: opt_coder});
+			    sonicSocket = new SonicSocket({coder: opt_coder});
+			  } else {
+			    sonicServer = new SonicServer({alphabet: ALPHABET, debug: false});
+			    sonicSocket = new SonicSocket({alphabet: ALPHABET});
+			  }
+
+			  // sonicServer.start();
+			  // sonicServer.on('message', onIncomingEmoticon);
+			}
+
+			var coder = new SonicCoder({
+		      freqMin: 440,
+		      freqMax: 1760
+		    });
+		    sonicSocket = new SonicSocket({coder:coder});
+		    //createSonicNetwork();
+
+		 //    function generateAlphabet(list) {
+			//   var alphabet = '';
+			//   for (var i = 0; i < Math.min(list.length, 9); i++) {
+			//     alphabet += i.toString();
+			//   }
+			//   return alphabet;
+			// }
+
+			function sendCmd(cmd){
+				sonicSocket.send(cmd);
+				$('.i').text(cmd);
+			}
+
+			$('#prev').click(function(){
+				sendCmd(commands.prev);
+			});
+
+			$('#next').click(function(){
+				sendCmd(commands.next);
+			});
+
+			$('#first').click(function(){
+				sendCmd(commands.first);
+			});
+
+			$('#overview').click(function(){
+				sendCmd(commands.overview);
+			});
+
+			$('#reward').click(function(){
+				sendCmd(commands.reward);
+			});
+		});
+	</script>
+</body>
+</html>
