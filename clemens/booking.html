@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book appoinments</title>
+    <link rel="stylesheet" href="css/datepicker.min.css">
+    <link rel="stylesheet" href="css/intlTelInput.css">
+    <style>
+        .app {
+            display: block;
+            margin: .5em;
+            text-decoration: none;
+        }
+
+        #picker {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #slots {
+            display: inline-block;
+            margin-left: 3em;
+            vertical-align: top;
+        }
+
+        body {
+            margin: 2em;
+            font-family: sans-serif;
+            font-size: 90%;
+        }
+
+        label {
+            display: block;
+            width: 11em;
+        }
+
+        .datefield {
+            padding: 0.3em;
+            border: inset 1px #CCC;
+            background: #FFF;
+            border-radius: 4px;
+            color: #666;
+        }
+
+        .datefield * {
+            display: inline-block;
+        }
+
+        .datefield input {
+            width: 1.7em;
+            padding: 0 0.4em;
+            border: none;
+            font-size: 100%;
+            background: none;
+            color: #000;
+        }
+
+        .datefield input#year { width:2.5em; }
+        .datefield input:focus { outline:none; }
+
+        .pages .page {
+            display: none;
+        }
+
+        .pages.show-1 .page1 {
+            display: block;
+        }
+
+        .pages.show-2 .page2 {
+            display: block;
+        }
+
+        label input {
+            padding: 0.6em;
+            font-size: 1em;
+            margin-top: 0.5em;
+        }
+
+        #bday {
+            margin-top: 0.5em;
+        }
+
+        input#book {
+            font-size: 1.2em;
+            margin-top: 0.5em;
+            padding: 0 0.5em;
+        }
+
+        #phone {
+            padding-top: 0.6em;
+            padding-bottom: 0.6em;
+            font-size: 1em;
+        }
+    </style>
+
+    <style>
+        #circularG{
+            position:relative;
+            width:58px;
+            height:58px;
+            margin: auto;
+            margin-left: 3em;
+            display: inline-block;
+        }
+
+        #circularG .label {
+            display: inline-block;
+            position: absolute;
+            bottom: -2em;
+            white-space: nowrap;
+        }
+
+        .circularG{
+            position:absolute;
+            background-color:rgb(0,0,0);
+            width:14px;
+            height:14px;
+            border-radius:9px;
+            -o-border-radius:9px;
+            -ms-border-radius:9px;
+            -webkit-border-radius:9px;
+            -moz-border-radius:9px;
+            animation-name:bounce_circularG;
+            -o-animation-name:bounce_circularG;
+            -ms-animation-name:bounce_circularG;
+            -webkit-animation-name:bounce_circularG;
+            -moz-animation-name:bounce_circularG;
+            animation-duration:1.1s;
+            -o-animation-duration:1.1s;
+            -ms-animation-duration:1.1s;
+            -webkit-animation-duration:1.1s;
+            -moz-animation-duration:1.1s;
+            animation-iteration-count:infinite;
+            -o-animation-iteration-count:infinite;
+            -ms-animation-iteration-count:infinite;
+            -webkit-animation-iteration-count:infinite;
+            -moz-animation-iteration-count:infinite;
+            animation-direction:normal;
+            -o-animation-direction:normal;
+            -ms-animation-direction:normal;
+            -webkit-animation-direction:normal;
+            -moz-animation-direction:normal;
+        }
+
+        #circularG_1{
+            left:0;
+            top:23px;
+            animation-delay:0.41s;
+            -o-animation-delay:0.41s;
+            -ms-animation-delay:0.41s;
+            -webkit-animation-delay:0.41s;
+            -moz-animation-delay:0.41s;
+        }
+
+        #circularG_2{
+            left:6px;
+            top:6px;
+            animation-delay:0.55s;
+            -o-animation-delay:0.55s;
+            -ms-animation-delay:0.55s;
+            -webkit-animation-delay:0.55s;
+            -moz-animation-delay:0.55s;
+        }
+
+        #circularG_3{
+            top:0;
+            left:23px;
+            animation-delay:0.69s;
+            -o-animation-delay:0.69s;
+            -ms-animation-delay:0.69s;
+            -webkit-animation-delay:0.69s;
+            -moz-animation-delay:0.69s;
+        }
+
+        #circularG_4{
+            right:6px;
+            top:6px;
+            animation-delay:0.83s;
+            -o-animation-delay:0.83s;
+            -ms-animation-delay:0.83s;
+            -webkit-animation-delay:0.83s;
+            -moz-animation-delay:0.83s;
+        }
+
+        #circularG_5{
+            right:0;
+            top:23px;
+            animation-delay:0.97s;
+            -o-animation-delay:0.97s;
+            -ms-animation-delay:0.97s;
+            -webkit-animation-delay:0.97s;
+            -moz-animation-delay:0.97s;
+        }
+
+        #circularG_6{
+            right:6px;
+            bottom:6px;
+            animation-delay:1.1s;
+            -o-animation-delay:1.1s;
+            -ms-animation-delay:1.1s;
+            -webkit-animation-delay:1.1s;
+            -moz-animation-delay:1.1s;
+        }
+
+        #circularG_7{
+            left:23px;
+            bottom:0;
+            animation-delay:1.24s;
+            -o-animation-delay:1.24s;
+            -ms-animation-delay:1.24s;
+            -webkit-animation-delay:1.24s;
+            -moz-animation-delay:1.24s;
+        }
+
+        #circularG_8{
+            left:6px;
+            bottom:6px;
+            animation-delay:1.38s;
+            -o-animation-delay:1.38s;
+            -ms-animation-delay:1.38s;
+            -webkit-animation-delay:1.38s;
+            -moz-animation-delay:1.38s;
+        }
+
+
+
+        @keyframes bounce_circularG{
+            0%{
+                transform:scale(1);
+            }
+
+            100%{
+                transform:scale(.3);
+            }
+        }
+
+        @-o-keyframes bounce_circularG{
+            0%{
+                -o-transform:scale(1);
+            }
+
+            100%{
+                -o-transform:scale(.3);
+            }
+        }
+
+        @-ms-keyframes bounce_circularG{
+            0%{
+                -ms-transform:scale(1);
+            }
+
+            100%{
+                -ms-transform:scale(.3);
+            }
+        }
+
+        @-webkit-keyframes bounce_circularG{
+            0%{
+                -webkit-transform:scale(1);
+            }
+
+            100%{
+                -webkit-transform:scale(.3);
+            }
+        }
+
+        @-moz-keyframes bounce_circularG{
+            0%{
+                -moz-transform:scale(1);
+            }
+
+            100%{
+                -moz-transform:scale(.3);
+            }
+        }
+    </style>
+
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/datepicker.min.js"></script>
+    <script src="js/jquery.autotab.min.js"></script>
+    <script src="js/intlTelInput.min.js"></script>
+</head>
+<body>
+
+    <div class="pages show-1 show-2">
+        <div class="page page1">
+            <h2>Please select appoinment date and time</h2>
+            <input id="date" data-toggle="datepicker" style="display:none">
+            <div id="picker"></div>
+
+            <div id="circularG" style="display:none;">
+                <div id="circularG_1" class="circularG"></div>
+                <div id="circularG_2" class="circularG"></div>
+                <div id="circularG_3" class="circularG"></div>
+                <div id="circularG_4" class="circularG"></div>
+                <div id="circularG_5" class="circularG"></div>
+                <div id="circularG_6" class="circularG"></div>
+                <div id="circularG_7" class="circularG"></div>
+                <div id="circularG_8" class="circularG"></div>
+                <div class="label">Please wait ...</div>
+            </div>
+
+            <div id="slots"></div>
+        </div>
+
+        <div class="page page2" style="">
+            <h2>Please fill your info</h2>
+            <form action="" id="details">
+                <br />
+                <label for="" class="title">Title: <input type="text" name="title"></label> <br />
+                <label for="" class="fname">First name: <input type="text" name="fname"></label> <br />
+                <label for="" class="lname">Last name: <input type="text" name="lname"></label> <br />
+                <label for="" class="phone">Phone: <input type="text" name="phone"></label> <br />
+
+                <p id="output">Please enter a number below</p>
+                <input id="phone" type="tel">
+
+                <label for="" class="email">Email: <input type="text" name="email"></label> <br />
+
+                <label for="day">Date of Birth (autotab):
+                    <div id="bday" class="datefield">
+                        <input id="day" type="tel" maxlength="2" placeholder="DD"/> /
+                        <input id="month" type="tel" maxlength="2" placeholder="MM"/>/
+                        <input id="year" type="tel" maxlength="4" placeholder="YYYY"/>
+                    </div>
+                </label>
+
+                <input type="button" value="Book now" id="book">
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        function initPhoneInput(){
+            var input = $("#phone"),
+                output = $("#output");
+
+            input.intlTelInput({
+                nationalMode: true,
+                utilsScript: "js/utils.js" // just for formatting/placeholders etc
+            });
+
+            // listen to "keyup", but also "change" to update when the user selects a country
+            input.on("keyup change", function() {
+                var intlNumber = input.intlTelInput("getNumber");
+                if (intlNumber) {
+                    output.text("International: " + intlNumber);
+                } else {
+                    output.text("Please enter a number below");
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            var appointmentDate;
+            var $container = $('#picker');
+            var selectedSlot;
+
+            $('[data-toggle="datepicker"]').datepicker({inline: true, container: $container});
+            initPhoneInput();
+
+
+            var appUrl = 'https://script.google.com/macros/s/AKfycbxBdbAZcIbRc-sKQyZwotcktb4Q8TS4OqbA0faZRq6IyI4MONM/exec';
+
+            function showPage(n){
+                var classList = $('.pages').attr('class').split(/\s+/);
+                $.each(classList, function(index, item) {
+                    if (item.substr(0,5) === 'show-') {
+                        $('.pages').removeClass(item);
+                    }
+                });
+
+                $('.pages').addClass('show-'+n);
+            }
+
+            function updTimeslots(date){
+                var $slots = $('#slots');
+                $('#circularG').show();
+                $slots.html('');
+                $.get(appUrl+'?date='+date).success(function(slots){
+                    $('#circularG').hide();
+
+                    for (var i=0;i<slots.length;i++) {
+                        var $a = $('<a />').text(slots[i].title).addClass('app').attr('href', '#');
+                        $a.slot = slots[i];
+
+                        $a.click(function (sl) {
+                            return function () {
+                                $(this).siblings().remove();
+                                selectedSlot = sl;
+
+                                showPage(2);
+                                return false;
+                            };
+                        }(slots[i]));
+
+                        $slots.append($a);
+                    }
+                });
+
+
+            }
+
+            $('#date').on('pick.datepicker', function (e) {
+                if (e.date < new Date()) {
+                    e.preventDefault(); // Prevent to pick the date
+                }
+
+                selectedSlot = null;
+                var d = formatDate(e.date);
+                updTimeslots(d);
+            });
+
+            $('#book').click(function(){
+                var fdata = {
+                    title: $('#details .title input').val(),
+                    fname: $('#details .fname input').val(),
+                    lname: $('#details .lname input').val(),
+                    phone: $('#details .phone input').val(),
+                    email: $('#details .email input').val(),
+                    birthday: {
+                        day: $('#details input#day').val(),
+                        month: $('#details input#month').val(),
+                        year: $('#details input#year').val()
+                    },
+                };
+
+                var data = $.extend({}, selectedSlot, fdata);
+                $.post( appUrl, {data: JSON.stringify(data)} );
+                //console.log(data);
+            });
+
+            // Uses jQuery autotab plugin
+            // - auto tabs to next field when input is full
+            // - filters/removes all input to specific values ig. numbers only
+            // http://www.mathachew.com/sandbox/jquery-autotab/
+            $('#bday input').autotab_magic().autotab_filter('numeric');
+
+        });
+    </script>
+</body>
+</html>
