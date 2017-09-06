@@ -15,6 +15,7 @@
 	<input type="button" id="toggle" value="Wake Lock is disabled" />
 
     <script>
+    /*
       var noSleep = new NoSleep();
 
       var wakeLockEnabled = false;
@@ -34,7 +35,24 @@
         }
       });
 
-      
+      */
+
+        var noSleep = new NoSleep();
+
+		function enableNoSleep() {
+		  noSleep.enable();
+		  document.removeEventListener('touchstart', enableNoSleep, false);
+		}
+
+		// Enable wake lock.
+		// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+		document.addEventListener('touchstart', enableNoSleep, false);
+
+		// ...
+
+		// Disable wake lock at some point in the future.
+		// (does not need to be wrapped in any user input event handler)
+		noSleep.disable();
     </script>
 
 </body>
