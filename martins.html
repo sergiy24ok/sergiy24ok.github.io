@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>NoSleep</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 	<script src="http://richtr.github.io/NoSleep.js/dist/NoSleep.min.js"></script>
 </head>
 <body>
@@ -14,8 +18,8 @@
 
       var wakeLockEnabled = false;
       var toggleEl = document.querySelector("#toggle");
-      toggleEl.addEventListener('click', function() {
-        if (!wakeLockEnabled) {
+      $('#toggle').click(function(){
+      	if (!wakeLockEnabled) {
           noSleep.enable(); // keep the screen on!
           wakeLockEnabled = true;
           toggleEl.value = "Wake Lock is enabled";
@@ -26,7 +30,9 @@
           toggleEl.value = "Wake Lock is disabled";
           document.body.style.backgroundColor = "";
         }
-      }, false);
+      });
+
+      
     </script>
 
 </body>
