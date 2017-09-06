@@ -23,12 +23,13 @@
           // noSleep.enable(); // keep the screen on!
           wakeLockEnabled = true;
           $('#toggle').val("Wake Lock is enabled");
+          $('body').css('background', 'green');
           document.body.style.backgroundColor = "green";
         } else {
           // noSleep.disable(); // let the screen turn off.
           wakeLockEnabled = false;
           $('#toggle').val("Wake Lock is disabled");
-          document.body.style.backgroundColor = "";
+          $('body').css('background', 'white');
         }
       });
 
