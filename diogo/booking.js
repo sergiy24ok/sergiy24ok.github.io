@@ -51,11 +51,8 @@ function initPhoneInput(){
 }
 
 $(document).ready(function(){
-    // var appUrl = 'https://script.google.com/macros/s/AKfycbzMK8AgZObBqDPk89fqrjk8qfLY4b5NX8hp1ppnRbwJsNsMnTI/exec';
-    // var appUrl = 'https://script.google.com/macros/s/AKfycbxBdbAZcIbRc-sKQyZwotcktb4Q8TS4OqbA0faZRq6IyI4MONM/exec';
-    
-    // sergey.gulesku@gmail.com - https://drive.google.com/drive/folders/1h7T6fmrGVEyoe7fHuyaqy9Yd9FPFRGIR
-    var appUrl = 'https://script.google.com/macros/s/AKfycbzk8nTMADTqR3mtlAoh4L_C7Odev9D6y6qfY9SGXwta1ivk9aE/exec';
+
+    var appUrl = 'https://script.google.com/macros/s/AKfycbyFkqAqMOgGFGGcYfVC-ihwUyqeO6eV7X9Dd1x55Yvh/dev';
     var appointmentDate;
     var $container = $('#picker');
     var selectedSlot;
@@ -88,36 +85,8 @@ $(document).ready(function(){
         i18n: i18n,
         minDate: new Date(),
         firstDay: window.calendarStartsAt || 0,
-        onSelect: dateSelected,
-        disableDayFn:
-            function(dateTime) {
-                var _d = formatDate(dateTime);
-                return disabledDates.indexOf(_d) > -1;
-            }
-        });
-
-
-
-
-
-
-
-    function loadDisabledDates(d){
-        if (!d){
-            d = formatDate(new Date());
-        }
-
-        $.get(appUrl+'?feature=getMonthAvail&date='+d).done(function(data){
-            for (var day in data){
-                if (!data[day] && -1 == disabledDates.indexOf(day)){
-                    disabledDates.push(day);
-                }
-            }
-            picker.adjustCalendars();
-
-        })
-    }
-    loadDisabledDates();
+        onSelect: dateSelected
+    });
 
 
     var nm = picker.nextMonth;
@@ -128,8 +97,6 @@ $(document).ready(function(){
         d.setDate(1);
         d.setMonth(m+1);
         d.setYear(y);
-        disabledDates = [];
-        loadDisabledDates(formatDate(d));
         nm.call(this);
     };
 
