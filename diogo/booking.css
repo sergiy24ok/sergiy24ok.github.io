@@ -82,6 +82,27 @@ label {
 
 .pages.show-1 .page1 {
     display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.page1 .pika-button {
+    height: 4em;
+    text-align: center;
+    background: none;
+}
+
+.page1 .is-disabled .pika-button,
+.page1 .is-inrange .pika-button {
+    background: none;
+}
+
+.page1 .is-selected .pika-button, .has-event .pika-button {
+    border-radius: 50%;
+}
+
+.page1 .pika-lendar {
+    width: 24em;
 }
 
 .pages.show-2 .page2 {
@@ -153,7 +174,9 @@ span.slot {
 #slots {
     adisplay: table-row;
     max-height: 20em;
+    min-height: 20em;
     overflow: auto;
+    margin-top: 2em;
 }
 
 .day-slots {
