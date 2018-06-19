@@ -184,7 +184,7 @@ $(document).ready(function(){
             $('#circularG').show();
         }
 
-        var qString = '?fdate='+date;
+        var qString = '?date='+date;
         if (live) {
             qString += '&source=live';
         }
