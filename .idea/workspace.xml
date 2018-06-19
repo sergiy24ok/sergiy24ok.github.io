@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="258ce651-3a4b-4dfc-80b3-c9166e15d55a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/diogo/booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/booking.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/diogo/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diogo/clemens.gs.js" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/clemens.gs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diogo/diogo.gs.js" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/diogo.gs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/diogo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,12 +19,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="clemens.gs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diogo/clemens.gs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-319">
-              <caret line="114" column="25" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
+            <state relative-caret-position="697">
+              <caret line="714" column="1" lean-forward="true" selection-start-line="662" selection-end-line="714" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -30,10 +32,10 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diogo/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+            <state relative-caret-position="325">
+              <caret line="67" column="71" selection-start-line="67" selection-start-column="67" selection-end-line="67" selection-end-column="71" />
               <folding>
-                <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,26 +44,26 @@
       <file leaf-file-name="booking.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diogo/booking.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="150" column="1" lean-forward="true" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
+            <state relative-caret-position="4350">
+              <caret line="150" column="1" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="diogo.gs.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="diogo.gs.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diogo/diogo.gs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="848">
+              <caret line="63" column="1" lean-forward="true" selection-start-line="19" selection-end-line="63" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booking.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="booking.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diogo/booking.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="215" column="144" selection-start-line="215" selection-start-column="144" selection-end-line="215" selection-end-column="144" />
+            <state relative-caret-position="435">
+              <caret line="295" column="46" lean-forward="true" selection-start-line="295" selection-start-column="46" selection-end-line="295" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -80,6 +82,10 @@
       <find>moment-with</find>
       <find>change.se</find>
       <find>#slots</find>
+      <find>zz</find>
+      <find>name</find>
+      <find>post</find>
+      <find>doPost</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,11 +94,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/diogo/booking.css" />
+        <option value="$PROJECT_DIR$/diogo/index.html" />
+        <option value="$PROJECT_DIR$/diogo/booking.js" />
         <option value="$PROJECT_DIR$/diogo/clemens.gs.js" />
         <option value="$PROJECT_DIR$/diogo/diogo.gs.js" />
-        <option value="$PROJECT_DIR$/diogo/index.html" />
-        <option value="$PROJECT_DIR$/diogo/booking.css" />
-        <option value="$PROJECT_DIR$/diogo/booking.js" />
       </list>
     </option>
   </component>
@@ -108,10 +114,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="63" />
-    <option name="y" value="1020" />
+    <option name="x" value="3" />
+    <option name="y" value="1031" />
     <option name="width" value="1873" />
-    <option name="height" value="1071" />
+    <option name="height" value="1064" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -168,12 +174,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529406906757</updated>
-      <workItem from="1529406908599" duration="10384000" />
+      <workItem from="1529406908599" duration="10924000" />
+      <workItem from="1529432131008" duration="1210000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10384000" />
+    <option name="totallyTimeSpent" value="12134000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="1020" width="1873" height="1085" extended-state="6" />
@@ -181,21 +188,21 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24959914" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,24 +214,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/diogo/clemens.gs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-319">
+        <state relative-caret-position="3306">
           <caret line="114" column="25" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diogo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/diogo/booking.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="4350">
           <caret line="150" column="1" lean-forward="true" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
         </state>
       </provider>
@@ -238,8 +235,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/diogo/booking.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="215" column="144" selection-start-line="215" selection-start-column="144" selection-end-line="215" selection-end-column="144" />
+        <state relative-caret-position="7337">
+          <caret line="253" column="14" lean-forward="true" selection-start-line="251" selection-start-column="13" selection-end-line="253" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diogo/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2204">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diogo/booking.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4350">
+          <caret line="150" column="1" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diogo/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="67" column="71" selection-start-line="67" selection-start-column="67" selection-end-line="67" selection-end-column="71" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diogo/booking.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="295" column="46" lean-forward="true" selection-start-line="295" selection-start-column="46" selection-end-line="295" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diogo/clemens.gs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="714" column="1" lean-forward="true" selection-start-line="662" selection-end-line="714" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diogo/diogo.gs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="848">
+          <caret line="63" column="1" lean-forward="true" selection-start-line="19" selection-end-line="63" selection-end-column="1" />
         </state>
       </provider>
     </entry>

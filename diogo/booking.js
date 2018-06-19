@@ -212,7 +212,6 @@ $(document).ready(function(){
                     $(this).siblings().remove();
                     selectedSlot = sl;
                     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            console.log(sl);
                     var str = new Date(sl.start).toLocaleString(locales[lang], options) + " <span class='slot'>" + toTimeZone(new Date(sl.start), localTz) + "</span>";
                     $('#app-time span').html(str);
                     showPage(2);
@@ -249,17 +248,17 @@ $(document).ready(function(){
 
 
         //////////// for DEV puprposes ///////////////
-        // var daySlots = [{"start":"2018-06-21T05:00:00.000Z","end":"2018-06-21T05:30:00.000Z"},{"start":"2018-06-21T05:50:00.000Z","end":"2018-06-21T06:20:00.000Z"},{"start":"2018-06-21T06:40:00.000Z","end":"2018-06-21T07:10:00.000Z"},{"start":"2018-06-21T07:30:00.000Z","end":"2018-06-21T08:00:00.000Z"},{"start":"2018-06-21T08:20:00.000Z","end":"2018-06-21T08:50:00.000Z"},{"start":"2018-06-21T09:10:00.000Z","end":"2018-06-21T09:40:00.000Z"},{"start":"2018-06-21T10:00:00.000Z","end":"2018-06-21T10:30:00.000Z"},{"start":"2018-06-21T10:50:00.000Z","end":"2018-06-21T11:20:00.000Z"},{"start":"2018-06-21T11:40:00.000Z","end":"2018-06-21T12:10:00.000Z"},{"start":"2018-06-21T12:30:00.000Z","end":"2018-06-21T13:00:00.000Z"},{"start":"2018-06-21T13:20:00.000Z","end":"2018-06-21T13:50:00.000Z"},{"start":"2018-06-21T14:10:00.000Z","end":"2018-06-21T14:40:00.000Z"},{"start":"2018-06-21T15:00:00.000Z","end":"2018-06-21T15:30:00.000Z"},{"start":"2018-06-21T15:50:00.000Z","end":"2018-06-21T16:20:00.000Z"},{"start":"2018-06-21T16:40:00.000Z","end":"2018-06-21T17:10:00.000Z"},{"start":"2018-06-21T17:30:00.000Z","end":"2018-06-21T18:00:00.000Z"},{"start":"2018-06-21T18:20:00.000Z","end":"2018-06-21T18:50:00.000Z"}];
-        // slotList = daySlots;
-        // renderSlots();
+        var daySlots = [{"start":"2018-06-21T05:00:00.000Z","end":"2018-06-21T05:30:00.000Z"},{"start":"2018-06-21T05:50:00.000Z","end":"2018-06-21T06:20:00.000Z"},{"start":"2018-06-21T06:40:00.000Z","end":"2018-06-21T07:10:00.000Z"},{"start":"2018-06-21T07:30:00.000Z","end":"2018-06-21T08:00:00.000Z"},{"start":"2018-06-21T08:20:00.000Z","end":"2018-06-21T08:50:00.000Z"},{"start":"2018-06-21T09:10:00.000Z","end":"2018-06-21T09:40:00.000Z"},{"start":"2018-06-21T10:00:00.000Z","end":"2018-06-21T10:30:00.000Z"},{"start":"2018-06-21T10:50:00.000Z","end":"2018-06-21T11:20:00.000Z"},{"start":"2018-06-21T11:40:00.000Z","end":"2018-06-21T12:10:00.000Z"},{"start":"2018-06-21T12:30:00.000Z","end":"2018-06-21T13:00:00.000Z"},{"start":"2018-06-21T13:20:00.000Z","end":"2018-06-21T13:50:00.000Z"},{"start":"2018-06-21T14:10:00.000Z","end":"2018-06-21T14:40:00.000Z"},{"start":"2018-06-21T15:00:00.000Z","end":"2018-06-21T15:30:00.000Z"},{"start":"2018-06-21T15:50:00.000Z","end":"2018-06-21T16:20:00.000Z"},{"start":"2018-06-21T16:40:00.000Z","end":"2018-06-21T17:10:00.000Z"},{"start":"2018-06-21T17:30:00.000Z","end":"2018-06-21T18:00:00.000Z"},{"start":"2018-06-21T18:20:00.000Z","end":"2018-06-21T18:50:00.000Z"}];
+        slotList = daySlots;
+        renderSlots();
 
         /////////////////////////////////////////
 
-        slotRequest.success(function(daySlots){
-            slotList = daySlots;
-            renderSlots();
-        });
-        
+        // slotRequest.success(function(daySlots){
+        //     slotList = daySlots;
+        //     renderSlots();
+        // });
+
 
     }
 
@@ -276,13 +275,9 @@ $(document).ready(function(){
        }
 
         var fdata = {
-            title: $('#details .title input').val(),
-            fname: $('#details .fname input').val(),
-            lname: $('#details .lname input').val(),
+            name: $('#details .name input').val(),
             phone: $("#phone").intlTelInput("getNumber"),
             email: $('#details .email input').val(),
-            birthday: $('#bd').val(),
-            lang: lang,
         };
 
         var data = $.extend({}, selectedSlot, fdata);
@@ -295,16 +290,13 @@ $(document).ready(function(){
             if ('ok' == data) {
                 $('.page3').addClass('is-ok');
                 var d = formatDate(picker.getDate());
+
+                /*
                 console.log('Caching schedule ...');
                 $.get(appUrl + '?date=' + d + '&feature=cache').done(function (data) {
                     console.log('Cached', data);
                 });
-
-                console.log('Caching month availability ...');
-                $.get(appUrl + '?date=' + d + '&feature=cacheMonthAvail').done(function (data) {
-                    console.log('Cached', data);
-                });
-
+                */
             } else {
                 $('.page3').addClass('is-again');
             }
