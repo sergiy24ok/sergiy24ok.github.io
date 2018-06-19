@@ -193,49 +193,28 @@ $(document).ready(function(){
         slotRequest.always(function(){
             $('#circularG').hide();
         });
-        slotRequest.success(function(slots){
-            for (var iDate in slots){
-                var daySlots = slots[iDate];
-                var $dSlots = $('<div />').addClass('day-slots');
-                var locale = 'en-EN';
-                if ('ru' == lang) {
-                    locale = 'ru-RU';
-                }
-                if ('de' == lang) {
-                    locale = 'de-DE';
-                }
+        slotRequest.success(function(daySlots){
+            for (var i=0;i<daySlots.length;i++) {
+                var title = daySlots[i].start;
+                var $a = $('<a />').text(title).addClass('app').attr('href', '#');
+                $a.slot = daySlots[i];
 
-                var _h = new Date(iDate).toLocaleDateString(locale, {
-                    weekday: 'short',
-                    month: 'long',
-                    day: 'numeric' });
-                var $header = $('<div />').text(_h).addClass('date-header');
-                if (date == iDate) {
-                    $header.addClass('is-selected');
-                }
-                $dSlots.append($header);
+                $a.click(function (sl) {
+                    return function () {
+                        $(this).siblings().remove();
+                        selectedSlot = sl;
+                        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
-                for (var i=0;i<daySlots.length;i++) {
-                    var $a = $('<a />').text(daySlots[i].title).addClass('app').attr('href', '#');
-                    $a.slot = daySlots[i];
+                        var str = new Date(sl.start).toLocaleString(locales[lang], options) + " <span class='slot'>" + sl.title + "</span>";
+                        $('#app-time span').html(str);
+                        showPage(2);
+                        return false;
+                    };
+                }(daySlots[i]));
 
-                    $a.click(function (sl) {
-                        return function () {
-                            $(this).siblings().remove();
-                            selectedSlot = sl;
-                            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
-                            var str = new Date(sl.start).toLocaleString(locales[lang], options) + " <span class='slot'>" + sl.title + "</span>";
-                            $('#app-time span').html(str);
-                            showPage(2);
-                            return false;
-                        };
-                    }(daySlots[i]));
-
-                    $dSlots.append($a);
-                }
-                $slots.append($dSlots);
+                $dSlots.append($a);
             }
+            $slots.append($dSlots);
 
         });
 
