@@ -52,7 +52,7 @@ function initPhoneInput(){
 
 $(document).ready(function(){
 
-    var appUrl = 'https://script.google.com/macros/s/AKfycbyFkqAqMOgGFGGcYfVC-ihwUyqeO6eV7X9Dd1x55Yvh/dev';
+    var appUrl = 'https://script.google.com/macros/s/AKfycbxcOoYJmZvlqde7e3hrAazfFmmKo4iJCoJc93oDWW1AqJBGjROb/exec';
     var appointmentDate;
     var $container = $('#picker');
     var selectedSlot;
@@ -184,7 +184,7 @@ $(document).ready(function(){
             $('#circularG').show();
         }
 
-        var qString = '?feature=get5&date='+date;
+        var qString = '?fdate='+date;
         if (live) {
             qString += '&source=live';
         }

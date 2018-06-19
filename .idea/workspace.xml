@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="258ce651-3a4b-4dfc-80b3-c9166e15d55a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/diogo/clemens.gs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/diogo/diogo.gs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/diogo/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/booking.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -40,8 +37,8 @@
       <file leaf-file-name="booking.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diogo/booking.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1247">
-              <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+            <state relative-caret-position="290">
+              <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -137,15 +134,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529406906757</updated>
-      <workItem from="1529406908599" duration="628000" />
+      <workItem from="1529406908599" duration="1516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="628000" />
+    <option name="totallyTimeSpent" value="1516000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="1013" width="1873" height="1092" extended-state="6" />
+    <frame x="48" y="1020" width="1873" height="1085" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24959914" />
@@ -190,8 +187,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/diogo/booking.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1247">
-          <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+        <state relative-caret-position="290">
+          <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
         </state>
       </provider>
     </entry>
