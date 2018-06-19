@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book appoinments</title>
+    <link rel="stylesheet" href="css/intlTelInput.css">
+    <link rel="stylesheet" href="css/jquery-confirm.min.css">
+    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="css/spinner.css">
+    <link rel="stylesheet" href="css/pikaday.css">
+    <link rel="stylesheet" href="css/triangle.css">
+
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="js/intlTelInput.min.js"></script>
+    <script src="js/jquery-confirm.min.js"></script>
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/pikaday.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+
+    <script src="booking.js"></script>
+</head>
+<body>
+    <div class="pages show-1">
+        <div class="page page1">
+            <h2>Please select appoinment date and time</h2>
+            <input type="text" id="pikaday" style="display:none">
+            <div id="pc" style="display: inline-block;"></div>
+
+            <div id="circularG" style="display:none;">
+                <div id="circularG_1" class="circularG"></div>
+                <div id="circularG_2" class="circularG"></div>
+                <div id="circularG_3" class="circularG"></div>
+                <div id="circularG_4" class="circularG"></div>
+                <div id="circularG_5" class="circularG"></div>
+                <div id="circularG_6" class="circularG"></div>
+                <div id="circularG_7" class="circularG"></div>
+                <div id="circularG_8" class="circularG"></div>
+                <div class="label">Please wait ...</div>
+            </div>
+
+            <span id="no-slots" style="display: none;">No available hours, try to select other date</span>
+            <div id="slots"></div>
+        </div>
+
+        <div class="page page2" style="">
+            <h2>Please fill your info</h2>
+            <p id="app-time"><span></span> &nbsp;<a href="#" class="change-app">Change</a></p>
+            <form action="" id="details">
+                <br />
+                <label class="title">Title: <input type="text" name="title" placeholder="Mr. / Mrs." required></label> <br />
+                <label class="fname">First name: <input type="text" name="fname" required></label> <br />
+                <label class="lname">Last name: <input type="text" name="lname" required></label> <br />
+
+                <div class="phone-input">
+                    <p id="output">Please enter a number below</p>
+                    <input id="phone" type="tel" name="phone" required>
+                </div>
+
+                <label class="email">Email: <input type="text" name="email" required></label> <br />
+
+                <label>Date of Birth:
+                    <input type="text" id="bd" placeholder="DD/MM/YYYY" name="dob" />
+                </label>
+
+                <input type="button" value="Book now" name="book" id="book">
+            </form>
+        </div>
+
+        <div class="page page3">
+            <div class="ok">Thanks!</div>
+            <div class="again">Sorry, somebody has already booked this time. <a href="#" class="retry">try other date</a></div>
+        </div>
+    </div>
+
+
+    <script>
+
+    </script>
+</body>
+</html>
