@@ -76,6 +76,25 @@ $(document).ready(function(){
             weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
             weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
         };
+    var tzList = moment.tz.names();
+    var tzListFormatted = $.map(tzList, function (obj) {
+        // obj.text = obj.text || obj.name; // replace name with the property used for the text
+        return {
+            id: obj,
+            text: moment.tz(obj).format('Z z') + " " + obj
+        }
+    });
+    var localTz = moment.tz.guess();
+    console.log(tzListFormatted)
+    $('#tz').select2({
+        data: tzListFormatted
+    });
+    $('#tz').val(localTz).trigger('change');
+    $('#tz').on('change.select2', function(){
+        localTz = $('#tz').val();
+        renderSlots();
+    });
+
     var disabledDates = [];
     var picker = new Pikaday({
         field: document.getElementById('pikaday'),
@@ -87,6 +106,8 @@ $(document).ready(function(){
         firstDay: window.calendarStartsAt || 0,
         onSelect: dateSelected
     });
+
+
 
 
     var nm = picker.nextMonth;
@@ -171,7 +192,38 @@ $(document).ready(function(){
         return false;
     });
 
-    var slotRequest;
+    function toTimeZone(time, zone) {
+        var format = 'hh:mm A';
+        return moment(time, format).tz(zone).format(format);
+    }
+
+    var slotRequest, slotList = [];
+    function renderSlots(){
+        $('#slots').children().remove();
+        for (var i=0;i<slotList.length;i++) {
+            var title = slotList[i].start;
+            title = toTimeZone(new Date(title), localTz);
+
+            var $a = $('<a />').text(title).addClass('app').attr('href', '#');
+            $a.slot = slotList[i];
+
+            $a.click(function (sl) {
+                return function () {
+                    $(this).siblings().remove();
+                    selectedSlot = sl;
+                    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            console.log(sl);
+                    var str = new Date(sl.start).toLocaleString(locales[lang], options) + " <span class='slot'>" + toTimeZone(new Date(sl.start), localTz) + "</span>";
+                    $('#app-time span').html(str);
+                    showPage(2);
+                    return false;
+                };
+            }(slotList[i]));
+
+            $('#slots').append($a);
+        }
+    }
+
     function updTimeslots(date, live){
         var $slots = $('#slots');
         $('#no-slots').hide();
@@ -193,30 +245,21 @@ $(document).ready(function(){
         slotRequest.always(function(){
             $('#circularG').hide();
         });
+
+
+
+        //////////// for DEV puprposes ///////////////
+        // var daySlots = [{"start":"2018-06-21T05:00:00.000Z","end":"2018-06-21T05:30:00.000Z"},{"start":"2018-06-21T05:50:00.000Z","end":"2018-06-21T06:20:00.000Z"},{"start":"2018-06-21T06:40:00.000Z","end":"2018-06-21T07:10:00.000Z"},{"start":"2018-06-21T07:30:00.000Z","end":"2018-06-21T08:00:00.000Z"},{"start":"2018-06-21T08:20:00.000Z","end":"2018-06-21T08:50:00.000Z"},{"start":"2018-06-21T09:10:00.000Z","end":"2018-06-21T09:40:00.000Z"},{"start":"2018-06-21T10:00:00.000Z","end":"2018-06-21T10:30:00.000Z"},{"start":"2018-06-21T10:50:00.000Z","end":"2018-06-21T11:20:00.000Z"},{"start":"2018-06-21T11:40:00.000Z","end":"2018-06-21T12:10:00.000Z"},{"start":"2018-06-21T12:30:00.000Z","end":"2018-06-21T13:00:00.000Z"},{"start":"2018-06-21T13:20:00.000Z","end":"2018-06-21T13:50:00.000Z"},{"start":"2018-06-21T14:10:00.000Z","end":"2018-06-21T14:40:00.000Z"},{"start":"2018-06-21T15:00:00.000Z","end":"2018-06-21T15:30:00.000Z"},{"start":"2018-06-21T15:50:00.000Z","end":"2018-06-21T16:20:00.000Z"},{"start":"2018-06-21T16:40:00.000Z","end":"2018-06-21T17:10:00.000Z"},{"start":"2018-06-21T17:30:00.000Z","end":"2018-06-21T18:00:00.000Z"},{"start":"2018-06-21T18:20:00.000Z","end":"2018-06-21T18:50:00.000Z"}];
+        // slotList = daySlots;
+        // renderSlots();
+
+        /////////////////////////////////////////
+
         slotRequest.success(function(daySlots){
-            for (var i=0;i<daySlots.length;i++) {
-                var title = daySlots[i].start;
-                var $a = $('<a />').text(title).addClass('app').attr('href', '#');
-                $a.slot = daySlots[i];
-
-                $a.click(function (sl) {
-                    return function () {
-                        $(this).siblings().remove();
-                        selectedSlot = sl;
-                        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
-                        var str = new Date(sl.start).toLocaleString(locales[lang], options) + " <span class='slot'>" + sl.title + "</span>";
-                        $('#app-time span').html(str);
-                        showPage(2);
-                        return false;
-                    };
-                }(daySlots[i]));
-
-                $('#slots').append($a);
-            }
-
-
+            slotList = daySlots;
+            renderSlots();
         });
+        
 
     }
 

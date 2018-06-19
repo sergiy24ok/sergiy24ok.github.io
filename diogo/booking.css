@@ -2,12 +2,43 @@
     display: block;
     margin: .5em;
     text-decoration: none;
+
+    padding: 12px 24px;
+    max-width: 100%;
+    color:  rgb(66, 91, 118);
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
 }
 
-#slots {
+.app:hover {
+    background: #efefef;
+}
+
+.panel {
     display: inline-block;
     margin-left: 3em;
     vertical-align: top;
+    width: 30em;
+}
+
+.duration {
+    background-color: #e5eaf0!important;
+    color: #516f90;
+    border-radius: .1875rem;
+    border-width: 1px;
+    width: 100%;
+    font-size: .75rem;
+    line-height: .75rem;
+    padding: .5625rem 1rem;
+    font-weight: 400;
+    text-align: center;
+    transition: all .15s ease-out;
+    cursor: pointer;
+}
+
+#tz {
+    width: 100%;
 }
 
 body {
@@ -121,6 +152,8 @@ span.slot {
 
 #slots {
     adisplay: table-row;
+    max-height: 20em;
+    overflow: auto;
 }
 
 .day-slots {

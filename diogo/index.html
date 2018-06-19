@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/spinner.css">
     <link rel="stylesheet" href="css/pikaday.css">
     <link rel="stylesheet" href="css/triangle.css">
+    <link rel="stylesheet" href="css/select2.min.css">
 
     <script
             src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -18,8 +19,10 @@
     <script src="js/intlTelInput.min.js"></script>
     <script src="js/jquery-confirm.min.js"></script>
     <script src="js/moment-with-locales.js"></script>
+    <script src="js/moment-timezone-with-data.js"></script>
     <script src="js/pikaday.js"></script>
     <script src="js/jquery.validate.min.js"></script>
+    <script src="js/select2.full.min.js"></script>
 
     <script src="booking.js"></script>
 </head>
@@ -30,20 +33,31 @@
             <input type="text" id="pikaday" style="display:none">
             <div id="pc" style="display: inline-block;"></div>
 
-            <div id="circularG" style="display:none;">
-                <div id="circularG_1" class="circularG"></div>
-                <div id="circularG_2" class="circularG"></div>
-                <div id="circularG_3" class="circularG"></div>
-                <div id="circularG_4" class="circularG"></div>
-                <div id="circularG_5" class="circularG"></div>
-                <div id="circularG_6" class="circularG"></div>
-                <div id="circularG_7" class="circularG"></div>
-                <div id="circularG_8" class="circularG"></div>
-                <div class="label">Please wait ...</div>
+
+
+            <div class="panel">
+                <h2> How long do you need?</h2>
+                <div class="duration">30 min</div>
+                <span id="no-slots" style="display: none;">No available hours, try to select other date</span>
+
+                <h2>What time works best?</h2>
+                <input type="text" id="tz">
+                <div id="circularG" style="display:none;">
+                    <div id="circularG_1" class="circularG"></div>
+                    <div id="circularG_2" class="circularG"></div>
+                    <div id="circularG_3" class="circularG"></div>
+                    <div id="circularG_4" class="circularG"></div>
+                    <div id="circularG_5" class="circularG"></div>
+                    <div id="circularG_6" class="circularG"></div>
+                    <div id="circularG_7" class="circularG"></div>
+                    <div id="circularG_8" class="circularG"></div>
+                    <div class="label">Please wait ...</div>
+                </div>
+                <div id="slots">
+
+                </div>
             </div>
 
-            <span id="no-slots" style="display: none;">No available hours, try to select other date</span>
-            <div id="slots"></div>
         </div>
 
         <div class="page page2" style="">
