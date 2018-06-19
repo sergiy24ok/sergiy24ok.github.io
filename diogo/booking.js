@@ -212,9 +212,9 @@ $(document).ready(function(){
                     };
                 }(daySlots[i]));
 
-                $dSlots.append($a);
+                $('#slots').append($a);
             }
-            $slots.append($dSlots);
+
 
         });
 
