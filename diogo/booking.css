@@ -278,4 +278,12 @@ span.slot {
         width: 65%;
     }
 
+    .page1 .pika-lendar {
+        width: 100%;
+    }
+
+    .page1 .is-selected .pika-button, .has-event .pika-button {
+        border-radius: 0;
+    }
+
 }

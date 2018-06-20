@@ -34,8 +34,8 @@
       <file leaf-file-name="booking.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diogo/booking.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
-              <caret line="272" column="23" selection-start-line="272" selection-start-column="23" selection-end-line="272" selection-end-column="23" />
+            <state relative-caret-position="726">
+              <caret line="281" column="20" selection-start-line="281" selection-start-column="20" selection-end-line="281" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -177,12 +177,12 @@
       <updated>1529406906757</updated>
       <workItem from="1529406908599" duration="10924000" />
       <workItem from="1529432131008" duration="5858000" />
-      <workItem from="1529480406278" duration="10921000" />
+      <workItem from="1529480406278" duration="11358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27703000" />
+    <option name="totallyTimeSpent" value="28140000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="1020" width="1873" height="1085" extended-state="6" />
@@ -339,8 +339,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/diogo/booking.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="272" column="23" selection-start-line="272" selection-start-column="23" selection-end-line="272" selection-end-column="23" />
+        <state relative-caret-position="726">
+          <caret line="281" column="20" selection-start-line="281" selection-start-column="20" selection-end-line="281" selection-end-column="20" />
         </state>
       </provider>
     </entry>
