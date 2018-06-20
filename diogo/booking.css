@@ -39,6 +39,10 @@
     margin: 3em auto;
 }
 
+.panel #circularG .label {
+    left: -3em;
+}
+
 .page1 .pika-button:hover {
     color: #333;
     background: none;
