@@ -52,8 +52,8 @@ function initPhoneInput(){
 
 $(document).ready(function(){
 
-    // var appUrl = 'https://script.google.com/macros/s/AKfycbxcOoYJmZvlqde7e3hrAazfFmmKo4iJCoJc93oDWW1AqJBGjROb/exec';
-    var appUrl = 'https://script.google.com/macros/s/AKfycbzAEKJ1QxRW971-UTkK35SRmxo2f98HdsZnp9sP/exec';
+    var appUrl = 'https://script.google.com/macros/s/AKfycbxcOoYJmZvlqde7e3hrAazfFmmKo4iJCoJc93oDWW1AqJBGjROb/exec';
+    // var appUrl = 'https://script.google.com/macros/s/AKfycbzAEKJ1QxRW971-UTkK35SRmxo2f98HdsZnp9sP/exec';
     var appointmentDate;
     var $container = $('#picker');
     var selectedSlot;
@@ -108,44 +108,7 @@ $(document).ready(function(){
         },
         onSelect: dateSelected
     });
-
-
-
-
-    var nm = picker.nextMonth;
-    picker.nextMonth = function(){
-        var m = this.calendars[0].month;
-        var y = this.calendars[0].year;
-        var d = new Date();
-        d.setDate(1);
-        d.setMonth(m+1);
-        d.setYear(y);
-        nm.call(this);
-    };
-
-    var pm = picker.prevMonth;
-    picker.prevMonth = function(){
-        var m = this.calendars[0].month;
-        var y = this.calendars[0].year;
-        var d = new Date();
-        d.setDate(1);
-        d.setMonth(m-1);
-        d.setYear(y);
-        disabledDates = [];
-        loadDisabledDates(formatDate(d));
-        pm.call(this);
-    };
-
-
-    var bdPicker = new Pikaday({
-        field: document.getElementById('bd'),
-        yearRange: [1927, 2000],
-        theme: 'triangle-theme',
-        format: 'DD/MM/YYYY',
-        i18n: i18n,
-        firstDay: window.calendarStartsAt || 0,
-        // maxDate: new Date(),
-    });
+    
 
     var initD = getParameterByName('date', window.location.href);
     if (initD) {

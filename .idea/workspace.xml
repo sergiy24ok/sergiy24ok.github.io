@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="258ce651-3a4b-4dfc-80b3-c9166e15d55a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/diogo/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/booking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diogo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/diogo/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -71,8 +70,8 @@
       <file leaf-file-name="booking.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diogo/booking.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="55" column="102" selection-start-line="55" selection-start-column="102" selection-end-line="55" selection-end-column="102" />
+            <state relative-caret-position="290">
+              <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -202,12 +201,12 @@
       <updated>1529406906757</updated>
       <workItem from="1529406908599" duration="10924000" />
       <workItem from="1529432131008" duration="5858000" />
-      <workItem from="1529480406278" duration="7664000" />
+      <workItem from="1529480406278" duration="7924000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24446000" />
+    <option name="totallyTimeSpent" value="24706000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="1020" width="1873" height="1085" extended-state="6" />
@@ -364,8 +363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/diogo/booking.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="55" column="102" selection-start-line="55" selection-start-column="102" selection-end-line="55" selection-end-column="102" />
+        <state relative-caret-position="290">
+          <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
         </state>
       </provider>
     </entry>
