@@ -108,7 +108,7 @@ $(document).ready(function(){
         },
         onSelect: dateSelected
     });
-    
+
 
     var initD = getParameterByName('date', window.location.href);
     if (initD) {
