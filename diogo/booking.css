@@ -17,9 +17,23 @@
 
 .panel {
     display: inline-block;
-    margin-left: 3em;
+    margin-left: 4em;
     vertical-align: top;
     width: 30em;
+    position: relative;
+}
+
+.panel #circularG {
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 3em auto;
+}
+
+.page1 .pika-button:hover {
+    color: #333;
+    background: none;
+
 }
 
 .duration {
@@ -82,7 +96,7 @@ label {
 
 .pages.show-1 .page1 {
     display: block;
-    width: 80%;
+    width: 65em;
     margin: 0 auto;
 }
 
@@ -90,6 +104,11 @@ label {
     height: 4em;
     text-align: center;
     background: none;
+    font-size: 15px;
+}
+
+.page1 .pika-single {
+    border: none;
 }
 
 .page1 .is-disabled .pika-button,
@@ -102,7 +121,8 @@ label {
 }
 
 .page1 .pika-lendar {
-    width: 24em;
+    width: 30em;
+    margin: 0;
 }
 
 .pages.show-2 .page2 {
