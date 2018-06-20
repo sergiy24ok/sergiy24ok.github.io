@@ -102,6 +102,9 @@ $(document).ready(function(){
         i18n: i18n,
         minDate: new Date(),
         firstDay: window.calendarStartsAt || 0,
+        disableDayFn: function(date){
+            return (date.getDay() === 0);
+        },
         onSelect: dateSelected
     });
 
