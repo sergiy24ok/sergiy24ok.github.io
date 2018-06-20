@@ -254,3 +254,28 @@ span.slot {
 .date-header.is-selected {
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    .row {
+        display: block;
+    }
+
+    .row .cell {
+        display: block;
+        width: 100%;
+        margin-bottom: 3em;
+    }
+
+    .pages .page {
+        width: 90%;
+    }
+
+    .panel {
+        margin-left: 0;
+    }
+
+    img.logo {
+        width: 65%;
+    }
+
+}
