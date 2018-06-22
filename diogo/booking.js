@@ -52,8 +52,8 @@ function initPhoneInput(){
 
 $(document).ready(function(){
 
-    // var appUrl = 'https://script.google.com/macros/s/AKfycbxcOoYJmZvlqde7e3hrAazfFmmKo4iJCoJc93oDWW1AqJBGjROb/exec';
-    var appUrl = 'https://script.google.com/macros/s/AKfycbzAEKJ1QxRW971-UTkK35SRmxo2f98HdsZnp9sP/exec';
+    var appUrl = 'https://script.google.com/macros/s/AKfycbxcOoYJmZvlqde7e3hrAazfFmmKo4iJCoJc93oDWW1AqJBGjROb/exec'; // Sergey's app
+    // var appUrl = 'https://script.google.com/macros/s/AKfycbzAEKJ1QxRW971-UTkK35SRmxo2f98HdsZnp9sP/exec'; // Sara's app
     var appointmentDate;
     var $container = $('#picker');
     var selectedSlot;
@@ -263,13 +263,6 @@ $(document).ready(function(){
             if ('ok' == data) {
                 $('.page3').addClass('is-ok');
                 var d = formatDate(picker.getDate());
-
-                /*
-                console.log('Caching schedule ...');
-                $.get(appUrl + '?date=' + d + '&feature=cache').done(function (data) {
-                    console.log('Cached', data);
-                });
-                */
             } else {
                 $('.page3').addClass('is-again');
             }

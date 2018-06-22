@@ -43,6 +43,11 @@ function getSlots(d){
   var date = new Date(d);
   var settings = getSettings();
   
+  var today = new Date().setHours(0,0,0);
+  var tomorrow = new Date(today + 24 * 60 * 60 * 1000);
+  tomorrow = Utilities.formatDate(tomorrow, CalendarApp.getTimeZone(), "yyyy-MM-dd");
+  today = Utilities.formatDate(new Date(), CalendarApp.getTimeZone(), "yyyy-MM-dd");
+  
   var duration1 = settings.duration1 * 60 * 1000;
   var duration2 = settings.duration2 * 60 * 1000;
   var duration = duration1 + duration2;
@@ -51,12 +56,27 @@ function getSlots(d){
   var hour2 = settings.hour2;
   var slots = [];
   
+  
   var start = new Date(date).setHours(hour1);
   var end = new Date(date).setHours(hour2);
   var slotStart = new Date(start);
   var slotEnd = new Date(start + duration1);
   
   while (slotEnd.getTime() < end) {
+    if (d == tomorrow && new Date().getHours() >= 19 && slotStart.getHours() < 10) {
+      start = new Date(slotEnd.getTime() + duration2).getTime();
+      slotStart = new Date(start);
+      slotEnd = new Date(start + duration1);
+      continue;
+    }
+    
+    if (d == today && slotStart.getTime() < new Date().getTime() + 2*60*60*1000) {
+      start = new Date(slotEnd.getTime() + duration2).getTime();
+      slotStart = new Date(start);
+      slotEnd = new Date(start + duration1);
+      continue;
+    }
+    
     // other events/appointment in main calendar blocking current appoinment slot
     var calEvents  = getCalendarEvents(start - duration2, slotEnd.getTime() + duration2);
       // if no other appoinments and slot start is in future
