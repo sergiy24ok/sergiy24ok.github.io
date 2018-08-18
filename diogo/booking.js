@@ -166,6 +166,9 @@ $(document).ready(function(){
     function renderSlots(){
         $('#slots').replaceWith($('<div />').attr('id', 'slots'));
         //$('#slots').children().remove();
+        if (0 == slotList.length) {
+            $('#slots').appendChild($('<span />').text("We are fully booked for today. Please choose another day"))
+        }
         for (var i=0;i<slotList.length;i++) {
             var title = slotList[i].start;
             title = toTimeZone(new Date(title), localTz);
