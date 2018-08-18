@@ -251,7 +251,7 @@ $(document).ready(function(){
             name: $('#details .name input').val(),
             phone: $("#phone").intlTelInput("getNumber"),
             email: $('#details .email input').val(),
-            subject: $('#details .subject input').val(),
+            // subject: $('#details .subject input').val(),
         };
 
         var data = $.extend({}, selectedSlot, fdata);
