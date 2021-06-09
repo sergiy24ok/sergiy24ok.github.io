@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Breethe timer</title>
+
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="moment.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="jquery.pulse.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            padding: 3em;
+        }
+
+        div {
+            padding: .2em;
+        }
+
+        body {
+            zbackground: #000;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        #action {
+            position: absolute;
+            top: 1em;
+            width: 5em;
+            right: 0;
+            left: 0;
+            margin: auto;
+            font-size: 2em;
+        }
+
+        #interval {
+            position: absolute;
+            top: 3.5em;
+            width: 10em;
+            right: 0;
+            left: 0;
+            margin: auto;
+            font-size: 2em;
+        }
+
+        #timer {
+            position: absolute;
+            bottom: 10px;
+            width: 5em;
+            right: 0;
+            left: 0;
+            margin: auto;
+            font-size: 2em;
+        }
+
+        /* https://css-tricks.com/recreating-apple-watch-breathe-app-animation/ */
+
+        .watch-face {
+            height: 125px;
+            width: 125px;
+            animation: pulse 3s cubic-bezier(0.5, 0, 0.5, 1) alternate infinite;
+        }
+
+        .circle {
+            height: 125px;
+            width: 125px;
+            border-radius: 50%;
+            position: absolute;
+            mix-blend-mode: screen;
+            transform: translate(0, 0);
+            zanimation: center 3s infinite;
+        }
+
+        .circle:nth-child(odd) {
+            background: #61bea2;
+        }
+
+        .circle:nth-child(even) {
+            background: #529ca0;
+        }
+
+        .circle:nth-child(1) {
+            animation: circle-1 3s ease alternate infinite;
+        }
+
+        .circle:nth-child(2) {
+            animation: circle-2 3s ease alternate infinite;
+        }
+
+        .circle:nth-child(3) {
+            animation: circle-3 3s ease alternate infinite;
+        }
+
+        .circle:nth-child(4) {
+            animation: circle-4 3s ease alternate infinite;
+        }
+
+        .circle:nth-child(5) {
+            animation: circle-5 3s ease alternate infinite;
+        }
+
+        .circle:nth-child(6) {
+            animation: circle-6 3s ease alternate infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(.15) rotate(180deg);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes circle-1 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-35px, -50px);
+            }
+        }
+
+        @keyframes circle-2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(35px, 50px);
+            }
+        }
+
+        @keyframes circle-3 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-60px, 0);
+            }
+        }
+
+        @keyframes circle-4 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(60px, 0);
+            }
+        }
+
+        @keyframes circle-5 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-35px, 50px);
+            }
+        }
+
+        @keyframes circle-6 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(35px, -50px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="interval">
+        <input type="radio" value="3" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="btnradio1">3-3</label>
+
+        <input type="radio" value="4" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio2">4-4</label>
+
+        <input type="radio" value="5" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio3">5-5</label>
+
+        <input type="radio" value="6" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio4">6-6</label>
+    </div>
+
+    <span class="badge rounded-pill bg-dark" id="action">Вдих</span>
+    <span class="badge rounded-pill bg-dark" id="timer">0</span>
+
+<!--    <div class="watch-face">-->
+<!--        <div class="circle"></div>-->
+<!--        <div class="circle"></div>-->
+<!--        <div class="circle"></div>-->
+<!--        <div class="circle"></div>-->
+<!--        <div class="circle"></div>-->
+<!--        <div class="circle"></div>-->
+<!--    </div>-->
+
+    <script>
+        var count = 3, ivl, begin = new Date();
+        var state = 1;
+        $(document).ready(function () {
+            count = 3;
+
+            $('.watch-face').hide().show(0);
+            ivl = setInterval(function () {
+                var passed = moment.duration(moment().diff(begin));
+                //$('#timer').text(passed.seconds());
+                if (passed.seconds() % count == 0) {
+                    state = 1 - state;
+                    if (state == 1) {
+                        $('#action').text('Вдих');
+                        $('#timer').text(passed.seconds() % count);
+
+
+                        var el = $('#action');
+                        var originalWidth = el.width();
+
+                        var properties = {
+                            width : originalWidth * 5
+                        };
+
+                        el.pulse(properties, {duration : count*1000*2, pulses : 1});
+
+
+                    } else {
+                        $('#action').text('Видих');
+                        $('#timer').text(count - passed.seconds() % count);
+                    }
+                }
+
+                if (state == 1) {
+                    $('#timer').text(passed.seconds() % count);
+                } else {
+                     $('#timer').text(count - passed.seconds() % count);
+                }
+            }, 1000);
+
+            $('.btn-check').change(function (){
+                count = $(this).val();
+                $('.watch-face').css('animation-duration', count + "s");
+                $('.circle').css('animation-duration', count + "s");
+                $('.watch-face').hide().show(0);
+            });
+
+        });
+    </script>
+</body>
+</html>
