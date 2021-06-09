@@ -209,19 +209,17 @@
             $('.watch-face').hide().show(0);
             ivl = setInterval(function () {
                 var passed = moment.duration(moment().diff(begin));
-                //$('#timer').text(passed.seconds());
+
                 if (passed.seconds() % count == 0) {
                     state = 1 - state;
                     if (state == 1) {
                         $('#action').text('Вдих');
                         $('#timer').text(passed.seconds() % count);
 
-                        var el = $('#timer');
-                        var properties = {
+                        $('#action').pulse({
                             width : 800
-                        };
-
-                        el.pulse(properties, {duration : count*1000*2, pulses : 1});
+                        }, {duration : count*1000*2, pulses : 1});
+                        
                     } else {
                         $('#action').text('Видих');
                         $('#timer').text(count - passed.seconds() % count);
