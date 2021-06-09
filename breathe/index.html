@@ -52,7 +52,7 @@
         #timer {
             position: absolute;
             bottom: 10px;
-            width: 5em;
+            width: 100px;
             right: 0;
             left: 0;
             margin: auto;
@@ -216,17 +216,12 @@
                         $('#action').text('Вдих');
                         $('#timer').text(passed.seconds() % count);
 
-
-                        var el = $('#action');
-                        var originalWidth = el.width();
-
+                        var el = $('#timer');
                         var properties = {
-                            width : originalWidth * 5
+                            width : 800
                         };
 
                         el.pulse(properties, {duration : count*1000*2, pulses : 1});
-
-
                     } else {
                         $('#action').text('Видих');
                         $('#timer').text(count - passed.seconds() % count);
