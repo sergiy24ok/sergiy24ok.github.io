@@ -22,7 +22,7 @@
         }
 
         body {
-            zbackground: #000;
+            background: #000;
             display: flex;
             align-items: center;
             height: 100vh;
@@ -217,7 +217,7 @@
                         $('#timer').text(passed.seconds() % count);
 
                         $('#action').pulse({
-                            width : 800
+                            width : innerWidth * 0.8 | 0
                         }, {duration : count*1000*2, pulses : 1});
                         
                     } else {
